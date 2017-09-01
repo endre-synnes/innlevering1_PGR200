@@ -1,3 +1,5 @@
+package Database;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,7 +32,5 @@ public class DatabaseConnectionTest {
 
     @Test
     public void getContentFromTableForelesere() throws Exception {
-        StringBuilder s = db.printProfessor();
-        assertTrue(s != null);
     }
 }
