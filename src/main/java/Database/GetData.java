@@ -20,7 +20,7 @@ public class GetData {
     }
 
 
-
+    // TODO fikse slik metoden er genrell
     public ArrayList getDataFromTable(String tableName) throws Exception{
         try {
             statement = dbConn.getConnection().createStatement();
