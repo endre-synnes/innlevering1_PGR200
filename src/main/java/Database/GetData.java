@@ -46,7 +46,6 @@ public class GetData {
             Time end = result.getTime("slutTid");
             String comment = result.getString("kommentar");
             tables.add(new Lecturer(name, start, end, comment));
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

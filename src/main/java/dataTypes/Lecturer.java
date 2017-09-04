@@ -4,47 +4,46 @@ import java.sql.Time;
 
 public class Lecturer extends Tables {
 
-    private Time start;
-    private Time end;
-    private String comment;
+    private String firstName;
+    private String lastName;
+    private String email;
 
     public Lecturer() {
-        this("test", Time.valueOf("00:00:00"), Time.valueOf("00:00:00"), "Test");
+        this("test", "test", "Test");
     }
 
-    public Lecturer(String name, Time start, Time end, String comment) {
-        super(name);
-        setStart(start);
-        setEnd(end);
-        setComment(comment);
+    public Lecturer(String firstName, String lastname, String email) {
+        setFirstName(firstName);
+        setLastName(lastname);
+        setEmail(email);
     }
 
-    public Time getStart() {
-        return start;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setStart(Time start) {
-        this.start = start;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public Time getEnd() {
-        return end;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setEnd(Time end) {
-        this.end = end;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getComment() {
-        return comment;
+    public String getEmail() {
+        return email;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
     public String toString() {
-        return String.format("%-30s %-15s %-15s %-20s", super.toString(), getStart(), getEnd(), getComment());
+        return String.format("%s %-15s %-15s %-20s", super.toString(), getFirstName(), getLastName(), getEmail());
     }
 }
