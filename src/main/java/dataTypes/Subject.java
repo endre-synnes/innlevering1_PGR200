@@ -2,27 +2,33 @@ package dataTypes;
 
 public class Subject extends Tables{
 
-    private String facilities;
+    private String id, name;
     private int participants;
-    private int lecturerId;
 
     public Subject(){
-        this("test", "test", 0, 0);
+        this("test", "test", 0);
     }
 
-    public Subject(String name, String facilities, int participants, int lecturerId){
-        super(name);
-        setFacilities(facilities);
+    public Subject(String id, String name, int participants) {
+        setId(id);
+        setName(name);
         setParticipants(participants);
-        setLecturerId(lecturerId);
     }
 
-    public String getFacilities() {
-        return facilities;
+    public String getId() {
+        return id;
     }
 
-    public void setFacilities(String facilities) {
-        this.facilities = facilities;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getParticipants() {
@@ -33,16 +39,8 @@ public class Subject extends Tables{
         this.participants = participants;
     }
 
-    public int getLecturerId() {
-        return lecturerId;
-    }
-
-    public void setLecturerId(int lecturerId) {
-        this.lecturerId = lecturerId;
-    }
-
     @Override
     public String toString() {
-        return String.format("%-50s %-100s %-20s %-20s", super.toString(), getFacilities(), getParticipants(), getLecturerId());
+        return String.format("%-50s %-100s %-20s %-20s", super.toString(), getId(), getName(), getParticipants());
     }
 }

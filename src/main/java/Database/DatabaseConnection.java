@@ -9,20 +9,15 @@ public class DatabaseConnection{
 
     public DatabaseConnection(){ }
 
-    public boolean connect(String username, String password) throws Exception {
+    public Connection connect(String username, String password) throws Exception {
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pgr200", username, password);
-            return true;
+            return connection;
         }
         catch (Exception e){
             throw e;
         }
     }
-
-    public Connection getConnection(){
-        return connection;
-    }
-
 
 
 

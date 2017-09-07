@@ -9,21 +9,20 @@ import java.util.ArrayList;
 public class GetData {
 
     private ArrayList<Tables> tables;
-    DatabaseConnection dbConn;
-    Statement statement;
-    ResultSet result;
+    private Connection dbConn;
+    private Statement statement;
+    private ResultSet result;
 
     public GetData() throws Exception {
         tables = new ArrayList<Tables>();
-        dbConn = new DatabaseConnection();
-        dbConn.connect("root", "root");
+        dbConn = new DatabaseConnection().connect("root", "root");
     }
 
 
     // TODO fikse slik metoden er genrell
     public ArrayList getDataFromTable(String tableName) throws Exception{
         try {
-            statement = dbConn.getConnection().createStatement();
+            statement = dbConn.createStatement();
             result = statement.executeQuery("SELECT * FROM " + tableName);
             tables = new ArrayList<Tables>();
             while (result.next()){
@@ -38,14 +37,14 @@ public class GetData {
         }
     }
 
-
+    //TODO Legge denne i en egen klasse og ferdigstille denne.
     public void addLecturer(){
         try {
             String name = result.getString("navn");
             Time start = result.getTime("startTid");
             Time end = result.getTime("slutTid");
             String comment = result.getString("kommentar");
-            tables.add(new Lecturer(name, start, end, comment));
+            tables.add(new Lecturer());
         } catch (SQLException e) {
             e.printStackTrace();
         }
