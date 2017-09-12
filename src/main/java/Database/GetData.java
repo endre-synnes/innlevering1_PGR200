@@ -15,7 +15,7 @@ public class GetData {
 
     public GetData() throws Exception {
         tables = new ArrayList<Tables>();
-        dbConn = new DatabaseConnection().connect("root", "root");
+        dbConn = DatabaseConnection.connect("root", "root");
     }
 
 
@@ -40,11 +40,10 @@ public class GetData {
     //TODO Legge denne i en egen klasse og ferdigstille denne.
     public void addLecturer(){
         try {
-            String name = result.getString("navn");
-            Time start = result.getTime("startTid");
-            Time end = result.getTime("slutTid");
-            String comment = result.getString("kommentar");
-            tables.add(new Lecturer());
+            String firstName = result.getString("firstName");
+            String lastName = result.getString("lastName");
+            String email = result.getString("email");
+            tables.add(new Lecturer(firstName, lastName, email));
         } catch (SQLException e) {
             e.printStackTrace();
         }

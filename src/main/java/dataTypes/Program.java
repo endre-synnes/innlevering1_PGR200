@@ -1,6 +1,6 @@
 package dataTypes;
 
-public class Program {
+public class Program extends Tables{
     int id;
     String name;
 

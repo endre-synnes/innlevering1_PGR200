@@ -1,15 +1,17 @@
 package Database;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
-public class DatabaseConnection{
+public class DatabaseConnection implements AutoCloseable{
 
-    private Connection connection;
+    private static Connection connection;
 
     public DatabaseConnection(){ }
 
-    public Connection connect(String username, String password) throws Exception {
+    public static Connection connect(String username, String password) throws Exception {
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pgr200", username, password);
             return connection;
@@ -20,6 +22,7 @@ public class DatabaseConnection{
     }
 
 
+    public void close() throws SQLException {
 
-
+    }
 }

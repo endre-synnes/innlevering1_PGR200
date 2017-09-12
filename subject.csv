@@ -1,0 +1,7 @@
+subject;
+id;name;participants;
+VARCHAR(11) NOT NULL;VARCHAR(255) NOT NULL;INT(10) NOT NULL;
+String, String; int;
+id
+DB1100;Databaser 1;180;
+PGR200;Avansert Java;80;

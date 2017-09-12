@@ -41,6 +41,6 @@ public class Subject extends Tables{
 
     @Override
     public String toString() {
-        return String.format("%-50s %-100s %-20s %-20s", super.toString(), getId(), getName(), getParticipants());
+        return String.format("%-10s %-20s %-20s", getId(), getName(), getParticipants());
     }
 }

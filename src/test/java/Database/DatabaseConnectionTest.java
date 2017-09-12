@@ -21,13 +21,13 @@ public class DatabaseConnectionTest {
 
     @Test
     public void getConnectionToDatabase() throws Exception {
-        assertTrue(db.connect("root", "root"));
+        assertNotEquals(null, db.connect("root", "root"));
     }
 
 
     @Test (expected = Exception.class)
     public void failToConnectToDatabase() throws Exception {
-        assertTrue(db.connect("tull", "ball"));
+        assertEquals(null, db.connect("tull", "ball"));
     }
 
     @Test
