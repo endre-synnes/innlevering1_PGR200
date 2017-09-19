@@ -1,19 +1,15 @@
 import Database.PublishData;
-import dataTypes.Tables;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ReadFile extends PublishData{
-    private String[] columnNames, dataTypes;
-    private String primaryKey, typeOfFile;
-    ArrayList<String> linesInFile;
 
-    public ReadFile(){ }
+    public ReadFile() throws Exception {}
 
-    //TODO: Denne metoden skal lese filen og kalle på en klasse som oppretter riktige objekter, avhenger av filnavn
     public void read(String filename){
         try {
+            System.out.println("Reading file...");
             linesInFile = new ArrayList<>();
             Scanner reader = new Scanner(new FileReader(filename+".csv"));
             typeOfFile = reader.nextLine()
@@ -29,6 +25,7 @@ public class ReadFile extends PublishData{
 
             while (reader.hasNext()){ linesInFile.add(reader.nextLine()); }
             reader.close();
+            createTable();
         }
         catch (Exception e){
             e.getMessage();
@@ -46,8 +43,8 @@ public class ReadFile extends PublishData{
 
     public String getTypeOfFile() {return typeOfFile;}
 
-    public static void main(String[] args) {
-        ReadFile readFile = new ReadFile();
-        readFile.read("subject");
+    public void createTable() {
+        super.createTable(typeOfFile, primaryKey, columnNames, dataTypes);
     }
+
 }
