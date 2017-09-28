@@ -1,6 +1,5 @@
 package Innlevering1;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,11 +7,11 @@ public class CSVFileReader {
     private ArrayList<String> linesInFile;
     private String[] columnNames, dataTypes;
     private String primaryKey, tableName;
-    private Table table;
+    private DataConverter dataConverter;
 
     public CSVFileReader() {}
 
-    public Table read(String filename) {
+    public DataConverter read(String filename) {
         try {
             System.out.println("Reading file...");
             linesInFile = new ArrayList<>();
@@ -24,8 +23,9 @@ public class CSVFileReader {
 
             while (reader.hasNext()) linesInFile.add(reader.nextLine());
             reader.close();
-            table = new Table(linesInFile, primaryKey, tableName, dataTypes, columnNames);
-            return table;
+            dataConverter = new DataConverter(linesInFile, primaryKey, tableName, dataTypes, columnNames);
+            //if (!dataConverter.checkRightAmountOfColumns()) return null;
+            return dataConverter;
         }
         catch (Exception e){
             System.out.println("No such file!");

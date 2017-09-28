@@ -3,12 +3,15 @@ package Innlevering1.Database;
 import java.sql.*;
 
 public class DatabaseReader{
+    private DatabaseConnector dbConnector;
 
-    public DatabaseReader(){}
+    public DatabaseReader(DatabaseConnector dbConnector){
+        this.dbConnector = dbConnector;
+    }
 
 
     public String getAllTables(){
-        try (Connection connection = new DatabaseConnection().getConnection();
+        try (Connection connection = dbConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement("")){
             ResultSet result = statement.executeQuery("SHOW TABLES");
             return buildString(result);
@@ -19,21 +22,19 @@ public class DatabaseReader{
 
 
     public String getAllFromOneTable(String tableName) {
-        try (Connection connection = new DatabaseConnection().getConnection();
+        try (Connection connection = dbConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement("")){
             ResultSet result = statement.executeQuery("SELECT * FROM " + tableName);
             return buildString(result);
         }
         catch (SQLException e){
-            //e.printStackTrace();
-            //throw new SQLException("Could not get table " + tableName);
             return "No table with that name!";
         }
     }
 
 
     public String getLinesThatHasOneParameter(String tableName, String columnName, String parameter){
-        try (Connection connection = new DatabaseConnection().getConnection();
+        try (Connection connection = dbConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement("")){
             ResultSet result = statement.executeQuery("SELECT * FROM " + tableName
             + " WHERE " + columnName + " LIKE '" + parameter + "';");
@@ -41,13 +42,11 @@ public class DatabaseReader{
         }
         catch (SQLException e){
             return ("No table with that name or column name");
-            //e.printStackTrace();
-            //throw new SQLException("Could not get table " + tableName);
         }
     }
 
     public String getLinesWithValuesGreaterOrLessThen(String tableName, String columnName, String greaterOrLess, int value){
-        try(Connection connection = new DatabaseConnection().getConnection();
+        try(Connection connection = dbConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement("")){
             String sqlSyntax = "SELECT * FROM " + tableName + " WHERE " + columnName;
             if (greaterOrLess.equals("greater")){
@@ -65,12 +64,10 @@ public class DatabaseReader{
 
         }catch (SQLException e){
             return "No table with that name or column name!";
-            //e.printStackTrace();
-            //throw new SQLException("Could not get table " + tableName);
         }
     }
     public String countRowsInTable(String tableName) {
-        try (Connection connection = new DatabaseConnection().getConnection();
+        try (Connection connection = dbConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement("")) {
             String sqlSyntax = "Select count(*) as rows from " + tableName;
             return buildString(statement.executeQuery(sqlSyntax));
@@ -81,7 +78,7 @@ public class DatabaseReader{
     }
 
     public StringBuilder getMetaDataFromTable(String tableName){
-        try (Connection connection = new DatabaseConnection().getConnection();
+        try (Connection connection = dbConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement("")){
             ResultSet result = statement.executeQuery("SELECT * FROM " + tableName);
             ResultSetMetaData metaData = result.getMetaData();
@@ -101,19 +98,34 @@ public class DatabaseReader{
         }
     }
 
+    public boolean tableExist(String tableName){
+        //TODO få denne til å funke
+        try (Connection connection = dbConnector.getConnection()) {
+            DatabaseMetaData dbMetaData = connection.getMetaData();
+            ResultSet tables = dbMetaData.getTables(null, null, tableName, null);
 
-    public String buildString(ResultSet result){
+            return tables.next();
+
+        } catch (SQLException e){
+            return false;
+        }
+    }
+
+
+    private String buildString(ResultSet result){
         try {
-            String stringResult = "";
+            StringBuilder stringResult = new StringBuilder();
+            stringResult.append("-------------------------------------------------\n");
             int columnCount = result.getMetaData().getColumnCount();
             while (result.next()){
                 for (int i = 0; i < columnCount; i++) {
-                    stringResult += String.format("%-25s", result.getString(i + 1));
+                    stringResult.append(String.format("%-30s", result.getString(i + 1)));
                 }
-                stringResult += "\n";
+                stringResult.append("\n");
             }
             if (stringResult.length() == 0) return "No lines";
-            return stringResult;
+            stringResult.append("-------------------------------------------------");
+            return stringResult.toString();
         } catch (Exception e){
             return "Error while creating print!";
         }

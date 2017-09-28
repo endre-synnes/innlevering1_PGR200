@@ -1,31 +1,32 @@
 package Innlevering1;
 
 import Innlevering1.Database.DataPublisher;
+import Innlevering1.Database.DatabaseConnector;
 import Innlevering1.Database.DatabaseReader;
 
 import java.util.Scanner;
 
 public class Run {
-    Scanner scanner = new Scanner(System.in);
-    String input;
-    DatabaseReader reader = new DatabaseReader();
+    private Scanner scanner = new Scanner(System.in);
+    private DatabaseReader DBReader;
+    private DataPublisher publisher;
 
 
 
 
-    public Run(){
-
+    public Run(DatabaseConnector dbConnector){
+        DBReader = new DatabaseReader(dbConnector);
+        publisher = new DataPublisher(dbConnector);
     }
+
 
     public void run() throws Exception {
         boolean running = true;
         while (running) {
             System.out.println(printCommands());
-            //System.out.print("Enter your command: ");
-            input = scanner.nextLine();
+            String input = scanner.nextLine();
             runCases(input);
             if (input.equals("exit"))break;
-            System.out.println("\n");
 
         }
     }
@@ -64,7 +65,8 @@ public class Run {
         builder.append(String.format("%-10s %-50s\n", "6", "Count rows in a table."));
         builder.append(String.format("%-10s %-50s\n", "7", "Get metadata from table."));
         builder.append(String.format("%-10s %-50s\n", "exit", "Exit program"));
-        builder.append("Press the command value and hit 'Enter'!\n");
+        for (int i = 0; i < 60; i++) { builder.append("#"); }
+        builder.append("\nPress the command value and hit 'Enter':");
         return builder;
     }
 
@@ -73,48 +75,47 @@ public class Run {
     private void readFileAndPublish(){
         System.out.println("\nEnter name of file:");
         CSVFileReader CSVFileReader = new CSVFileReader();
-        input = scanner.nextLine();
-        Table table = CSVFileReader.read(input);
-        DataPublisher dataPublisher = new DataPublisher();
-        System.out.println(dataPublisher.createTable(table));
+        DataConverter dataConverter = CSVFileReader.read(scanner.nextLine());
+        System.out.println(publisher.createTable(dataConverter));
+        System.out.println(publisher.insertData(dataConverter) + "\n");
     }
 
     private void getAllTables(){
         System.out.println("\nPrinting all tables in database:");
-        System.out.println(reader.getAllTables());
+        System.out.println(DBReader.getAllTables());
     }
 
     private void getAllFromOneTable() {
         System.out.println("\nEnter name of the table you want to print: ");
-        System.out.println(reader.getAllFromOneTable(scanner.nextLine()) + "\n");
+        System.out.println(DBReader.getAllFromOneTable(scanner.nextLine()) + "\n");
     }
 
     private void getLinesWithParameter(){
         System.out.println("\nEnter name of table, column name and your parameter (press enter for each element):");
-        System.out.println(reader.getLinesThatHasOneParameter(scanner.nextLine(), scanner.nextLine(), scanner.nextLine()) + "\n");
+        System.out.println(DBReader.getLinesThatHasOneParameter(scanner.nextLine(), scanner.nextLine(), scanner.nextLine()) + "\n");
     }
 
     private void getLinesWithValuesGreaterOrLessThen() {
         System.out.println("\nEnter name of table, column name, greater/less and integer value");
-        System.out.println(reader.getLinesWithValuesGreaterOrLessThen(scanner.nextLine(), scanner.nextLine(), scanner.nextLine(), scanner.nextInt()) + "\n");
+        System.out.println(DBReader.getLinesWithValuesGreaterOrLessThen(scanner.nextLine(), scanner.nextLine(), scanner.nextLine(), scanner.nextInt()) + "\n");
     }
 
     private void countRows(){
         System.out.println("\nEnter name of the table you want to count rows: ");
-        System.out.println(reader.countRowsInTable(scanner.nextLine()));
+        System.out.println(DBReader.countRowsInTable(scanner.nextLine()));
     }
 
 
     private void getMetaDataFromTable() {
         System.out.println("\nEnter name of the table you want to get metadata from: ");
-        System.out.println(reader.getMetaDataFromTable(scanner.nextLine()));
+        System.out.println(DBReader.getMetaDataFromTable(scanner.nextLine()));
     }
 
 
 
 
     public static void main(String[] args) throws Exception {
-        Run run = new Run();
+        Run run = new Run(new DatabaseConnector("DatabaseProperties.properties"));
         run.run();
     }
 

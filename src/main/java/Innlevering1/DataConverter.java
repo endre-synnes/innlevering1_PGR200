@@ -2,18 +2,18 @@ package Innlevering1;
 
 import java.util.ArrayList;
 
-public class Table {
+public class DataConverter {
     private String primaryKey, tableName;
     private String[] dataTypes, columnNames;
     private String[][] tableFromLinesInFile;
 
-    public Table(ArrayList<String> linesInFile, String primaryKey, String tableName, String[] dataTypes, String[] columnNames) {
+    public DataConverter(ArrayList<String> linesInFile, String primaryKey, String tableName, String[] dataTypes, String[] columnNames) {
         setPrimaryKey(primaryKey);
         setTableName(tableName);
         setDataTypes(dataTypes);
         setColumnNames(columnNames);
         setLinesColumnsFromFile(linesInFile);
-        //if (!checkIntegrity()){throw new Exception("Integrety in file");}
+//        checkRightAmountOfColumns();
     }
 
     public String[][] getLinesAndColumnsFromFile() {
@@ -67,13 +67,22 @@ public class Table {
         this.columnNames = columnNames;
     }
 
-
-
-    public boolean checkIntegrity(){
-        if (dataTypes.length == columnNames.length && columnNames.length == getLinesAndColumnsFromFile()[0].length){
-            return true;
-        }
-        return false;
+    public boolean checkForAutoIncrementInTable(){
+        String primaryKeyDataType = getDataTypes()[0];
+        return primaryKeyDataType.contains("AUTO_INCREMENT");
     }
+
+
+//    public boolean checkRightAmountOfColumns(){
+//        boolean rightAmountOfColumns;
+//        rightAmountOfColumns = dataTypes.length == columnNames.length;
+//        int index = 0;
+//        if (checkForAutoIncrementInTable()) index = 1;
+//        int lines = getLinesAndColumnsFromFile()[0].length;
+//        for (int i = 0; i < lines; i++) {
+//            rightAmountOfColumns = getLinesAndColumnsFromFile()[i].length == (dataTypes.length - index);
+//        }
+//        return rightAmountOfColumns;
+//    }
 
 }

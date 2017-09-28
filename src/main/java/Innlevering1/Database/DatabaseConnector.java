@@ -7,7 +7,7 @@ import java.io.FileInputStream;
 import java.sql.*;
 import java.util.Properties;
 
-public class DatabaseConnection implements DatabaseInterface{
+public class DatabaseConnector implements DatabaseInterface{
     private static String hostName;
     private static String dbName;
     private static String userName;
@@ -15,12 +15,12 @@ public class DatabaseConnection implements DatabaseInterface{
     private static int port;
     private Properties prop;
 
-    public DatabaseConnection(){
-        this("DatabaseProperties.properties");
+    public DatabaseConnector(){
+        //this("DatabaseProperties.properties");
     }
 
 
-    public DatabaseConnection(String properties){
+    public DatabaseConnector(String properties){
         try {
             prop = new Properties();
             FileInputStream fileInputStream = new FileInputStream(properties);
@@ -64,7 +64,7 @@ public class DatabaseConnection implements DatabaseInterface{
     }
 
     public static void main(String[] args) throws Exception {
-        DatabaseConnection db = new DatabaseConnection();
+        DatabaseConnector db = new DatabaseConnector();
         if (db.getConnection() != null){
             System.out.println("Successful connection!");
         }

@@ -1,6 +1,10 @@
 subject;
 id;name;participants;
 VARCHAR(11) NOT NULL;VARCHAR(255) NOT NULL;INT(10) NOT NULL;
-id
-PGR101;Java 1;200;
+id;
+PGR101;Objektorientert programmering 1;206;
+PGR102;Objektorientert programmering 1;183;
+PRO100;Kreativt Webprosjekt;206;
+PRO200;Smidig Prosjekt;165;
+PGR200;Avansert Java;67;
 TK102;Informasjonssikkerhet;180;

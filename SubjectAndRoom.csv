@@ -1,6 +1,6 @@
 SubjectAndRoom;
-roomId;SubjectId;
+subjectId;roomId;
 VARCHAR(11) NOT NULL;VARCHAR(11) NOT NULL;
-roomId;SubjectId;
-F101;PG4200;
-F311;PGR200;
+subjectId;roomId;
+PG4200;F101;
+PGR200;F311;
