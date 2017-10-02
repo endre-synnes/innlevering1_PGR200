@@ -1,8 +1,9 @@
 **How to use this Application:**
 
-1.  Open the properties file called: "DatabaseProperties.properties"
+1.  Open the properties file called: "DatabaseProperties.properties".
 
 2.  Open a server (eks. localhost) insert the data needed to connect to your server into the properties file.
+    Set the user name, password, host name and port so the application will work with your server.
 
     a) The data needed is:
 

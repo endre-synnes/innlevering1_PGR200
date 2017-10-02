@@ -22,6 +22,10 @@ public class TableManager {
             statement.executeUpdate("DROP TABLE " + tableName);
             return "Table " + tableName + " is dropped!";
         }catch (SQLException e){
+            if (e.getErrorCode() == 1217)
+                return "Can't delete table because it is " +
+                        "connected to another table. Restart the Application" +
+                        " if you want to delete this table.";
             return "Could not drop table";
         }
     }

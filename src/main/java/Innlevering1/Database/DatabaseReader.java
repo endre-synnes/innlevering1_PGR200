@@ -63,7 +63,7 @@ public class DatabaseReader{
      * @param value
      * @return Return a formatted string containing lines with an int value greater og less then value you put in.
      */
-    public String getLinesWithValuesGreaterOrLessThen(String tableName, String columnName, String greaterOrLess, int value){
+    public String getLinesWithValuesGreaterOrLessThen(String tableName, String columnName, String greaterOrLess, String value){
         try(Connection connection = dbConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement("")){
             String sqlSyntax = "SELECT * FROM " + tableName + " WHERE " + columnName;
@@ -75,7 +75,7 @@ public class DatabaseReader{
                 sqlSyntax += " < " + value + ";";
 
             }
-            else return "Enter valid parameter (greater or less)";
+            else return "Enter valid data and parameter (greater or less)";
             ResultSet result = statement.executeQuery(sqlSyntax);
             return buildString(result);
 
@@ -112,8 +112,8 @@ public class DatabaseReader{
             ResultSet result = statement.executeQuery("SELECT * FROM " + tableName);
             ResultSetMetaData metaData = result.getMetaData();
             StringBuilder resultString = new StringBuilder();
-            resultString.append("----------------------------------------\n");
             resultString.append(String.format("%-15s %-15s %-15s\n", "Name", "Size", "Datatype"));
+            resultString.append("----------------------------------------\n");
             for (int i = 0; i < metaData.getColumnCount(); i++) {
                 resultString.append(String.format("%-15s %-15s %-15s\n",
                         metaData.getColumnName(i + 1),

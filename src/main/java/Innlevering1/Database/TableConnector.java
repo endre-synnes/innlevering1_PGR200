@@ -29,7 +29,7 @@ public class TableConnector {
                     "  ADD CONSTRAINT `" + constraintText + "`" +
                     " FOREIGN KEY (`" + mainTableColumnName +"`)" +
                     " REFERENCES `" + secondTable +"` (`" + secondTableColumnName +"`);");
-            return "successfully connected" + mainTable + " and " + secondTable;
+            return "successfully connected " + mainTable + " and " + secondTable;
 
         }catch (SQLException e){
             if (e.getErrorCode() == 1022) return "This constraint already exist!";

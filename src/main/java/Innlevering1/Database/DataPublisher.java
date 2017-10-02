@@ -21,7 +21,6 @@ public class DataPublisher {
     public String createTable(DataConverter dataConverterFromFile) {
         try (Connection connection = dbConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement("")){
-            System.out.println("Creating table...");
             statement.execute("DROP TABLE IF EXISTS " + dataConverterFromFile.getTableName());
             String sqlSyntax = "CREATE TABLE " + dataConverterFromFile.getTableName() + " (";
             for (int i = 0; i < dataConverterFromFile.getColumnNames().length; i++) {

@@ -80,7 +80,7 @@ public class Application {
         builder.append(String.format("%-10s %-50s\n", "6", "Count rows in a table."));
         builder.append(String.format("%-10s %-50s\n", "7", "Get metadata from table."));
         builder.append(String.format("%-10s %-50s\n", "8", "Connect all tables (Only after all tables are in the database!)"));
-        builder.append(String.format("%-10s %-50s\n", "9", "Drop Table (Needed to rewrite tables after they are connected)"));
+        builder.append(String.format("%-10s %-50s\n", "9", "Drop Table (Needed to rewrite tables if you have connected tables)"));
         builder.append(String.format("%-10s %-50s\n", "10", "Read all example files"));
         builder.append(String.format("%-10s %-50s\n", "exit", "Exit program"));
         for (int i = 0; i < 60; i++) { builder.append("#"); }
@@ -115,7 +115,7 @@ public class Application {
 
     private void getLinesWithValuesGreaterOrLessThen() {
         System.out.println("\nEnter name of table, column name, greater/less and integer value");
-        System.out.println(DBReader.getLinesWithValuesGreaterOrLessThen(scanner.nextLine(), scanner.nextLine(), scanner.nextLine(), scanner.nextInt()) + "\n");
+        System.out.println(DBReader.getLinesWithValuesGreaterOrLessThen(scanner.nextLine(), scanner.nextLine(), scanner.nextLine(), scanner.nextLine()) + "\n");
     }
 
     private void countRows(){
@@ -126,7 +126,7 @@ public class Application {
 
     private void getMetaDataFromTable() {
         System.out.println("\nEnter name of the table you want to get metadata from: ");
-        System.out.println(DBReader.getMetaDataFromTable(scanner.nextLine()));
+        System.out.println(DBReader.getMetaDataFromTable(scanner.nextLine()) + "\n");
     }
 
     /**
@@ -140,13 +140,13 @@ public class Application {
         System.out.println(tableConnector.addConstraintToTwoTables("subjectandprogram", "program", "programId", "id"));
         System.out.println(tableConnector.addConstraintToTwoTables("subjectandprogram", "subject", "subjectId", "id"));
         System.out.println(tableConnector.addConstraintToTwoTables("subjectandroom", "room", "roomId", "id"));
-        System.out.println(tableConnector.addConstraintToTwoTables("subjectandroom", "subject", "subjectId", "id"));
+        System.out.println(tableConnector.addConstraintToTwoTables("subjectandroom", "subject", "subjectId", "id") + "\n");
     }
 
 
     private void dropTable(){
         System.out.println("\nEnter name of the table you want to drop: ");
-        System.out.println(tableManager.dropTable(scanner.nextLine()));
+        System.out.println(tableManager.dropTable(scanner.nextLine()) + "\n");
     }
 
 
@@ -160,6 +160,7 @@ public class Application {
             publisher.createTable(dataConverter);
             publisher.insertData(dataConverter);
         }
+        System.out.println("All tables read.\n");
     }
 
 
