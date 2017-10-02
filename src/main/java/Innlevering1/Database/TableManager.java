@@ -11,13 +11,17 @@ public class TableManager {
         this.connector = connector;
     }
 
+    /**
+     * Deletes a table.
+     * @param tableName
+     * @return String explaining if i succeeded.
+     */
     public String dropTable(String tableName){
         try (Connection connection = connector.getConnection()){
             Statement statement = connection.createStatement();
             statement.executeUpdate("DROP TABLE " + tableName);
             return "Table " + tableName + " is dropped!";
         }catch (SQLException e){
-            System.out.println(e.getErrorCode());
             return "Could not drop table";
         }
     }

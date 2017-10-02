@@ -22,7 +22,7 @@ public class Application {
     }
 
     /**
-     *
+     * Run this method and it will keep the application running until you close it.
      */
     public void run() throws Exception {
         boolean running = true;
@@ -33,6 +33,9 @@ public class Application {
         }
     }
 
+    /**
+     * All commands you can call.
+     */
     public void runCases(String userInput){
         switch (userInput){
             case "1" : readFileAndPublish();
@@ -126,7 +129,9 @@ public class Application {
         System.out.println(DBReader.getMetaDataFromTable(scanner.nextLine()));
     }
 
-
+    /**
+     * Creates foreign key constraints for all example files.
+     */
     private void connectTables(){
         System.out.println("\nConnecting all tables...");
         System.out.println(tableConnector.addConstraintToTwoTables("availability", "lecturer", "lecturerId", "id"));

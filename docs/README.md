@@ -59,3 +59,34 @@ Insert new data into tables:
         Use separator for each column.
 
         look at the metadata to see that your formatting is correct.
+
+
+**Note to my solution**
+
+Testing:
+    
+    To test my application you can just run my class called "MyTestClass".
+    It includes som tests that checks if my classes and methods run as they
+    are suposed to.
+    
+Comment (Things I could have done better):
+
+    I know that i might have used PreperedStatement better, so that is is 
+    sercured for SQL-injection. The reason i found this difficult was because
+    of my dynamic reading of files. I could also made my CSVFileReader better.
+    
+    
+Comment (Things i think is good):
+    
+    My Application is totaly dynamic if you just follow the rules of my formatting.
+    You can give it a file with as many rows and columns as you like. My application
+    gives the user lots of possibilites when it comes to reading and writing to the database.
+    
+    
+Things i need to know to make my Program better:
+
+    How to make my application more secure to SQL-injection (Prepered statement)
+    and at the same time hva the same amount of possibilites. Feedback on how to
+    do my rading from file better and converting it to useful data. 
+
+    

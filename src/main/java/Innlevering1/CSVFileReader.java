@@ -11,10 +11,15 @@ public class CSVFileReader {
 
     public CSVFileReader() {}
 
+    /**
+     * Reads a file, then create an object of that file witch is then returned.
+     * @param filename
+     * @return converted file
+     */
     public DataConverter read(String filename) {
         try {
             linesInFile = new ArrayList<>();
-            Scanner reader = new Scanner(new java.io.FileReader(filename+".csv"));
+            Scanner reader = new Scanner(new java.io.FileReader("docs/files/" + filename+".csv"));
             tableName = reader.nextLine();
             columnNames = reader.nextLine().split(";");
             dataTypes = reader.nextLine().split(";");

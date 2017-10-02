@@ -11,7 +11,14 @@ public class TableConnector {
         this.connector = connector;
     }
 
-
+    /**
+     * Creats an foreign key constraint and connects two tables.
+     * @param mainTable
+     * @param secondTable
+     * @param mainTableColumnName
+     * @param secondTableColumnName
+     * @return String explaining if i succeeded.
+     */
     public String addConstraintToTwoTables(
             String mainTable, String secondTable, String mainTableColumnName, String secondTableColumnName){
 

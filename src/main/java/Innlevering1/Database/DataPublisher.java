@@ -13,6 +13,11 @@ public class DataPublisher {
         this.dbConnector = dbConnector;
     }
 
+    /**
+     * Creating a table or overwrites it if the table already exists.
+     * @param dataConverterFromFile
+     * @return String explaining if i succeeded.
+     */
     public String createTable(DataConverter dataConverterFromFile) {
         try (Connection connection = dbConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement("")){
@@ -35,6 +40,11 @@ public class DataPublisher {
 
     }
 
+    /**
+     * Inserting data into a table if it exist
+     * @param convertedFile
+     * @return String explaining if i succeeded.
+     */
     public String insertData(DataConverter convertedFile) {
         try (Connection connection = dbConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement("")){

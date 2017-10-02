@@ -20,7 +20,11 @@ public class DatabaseReader{
         }
     }
 
-
+    /**
+     *
+     * @param tableName
+     * @return A formatted string of all table names.
+     */
     public String getAllFromOneTable(String tableName) {
         try (Connection connection = dbConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement("")){
@@ -32,7 +36,13 @@ public class DatabaseReader{
         }
     }
 
-
+    /**
+     *
+     * @param tableName
+     * @param columnName
+     * @param parameter
+     * @return A formatted string containing Lines in a table that has one parameter.
+     */
     public String getLinesThatHasOneParameter(String tableName, String columnName, String parameter){
         try (Connection connection = dbConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement("")){
@@ -45,6 +55,14 @@ public class DatabaseReader{
         }
     }
 
+    /**
+     *
+     * @param tableName
+     * @param columnName
+     * @param greaterOrLess
+     * @param value
+     * @return Return a formatted string containing lines with an int value greater og less then value you put in.
+     */
     public String getLinesWithValuesGreaterOrLessThen(String tableName, String columnName, String greaterOrLess, int value){
         try(Connection connection = dbConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement("")){
@@ -66,6 +84,12 @@ public class DatabaseReader{
             return "No table with that name or column name!";
         }
     }
+
+    /**
+     *
+     * @param tableName
+     * @return Returns a string with the number of rows in a table.
+     */
     public String countRowsInTable(String tableName) {
         try (Connection connection = dbConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement("")) {
@@ -77,6 +101,11 @@ public class DatabaseReader{
         }
     }
 
+    /**
+     *
+     * @param tableName
+     * @return Returns a formatted string containing metadata from one table.
+     */
     public StringBuilder getMetaDataFromTable(String tableName){
         try (Connection connection = dbConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement("")){
@@ -98,6 +127,11 @@ public class DatabaseReader{
         }
     }
 
+    /**
+     *
+     * @param tableName
+     * @return True of False if table exist in the database or not.
+     */
     public boolean tableExist(String tableName){
         try (Connection connection = dbConnector.getConnection()) {
             DatabaseMetaData dbMetaData = connection.getMetaData();
@@ -110,7 +144,11 @@ public class DatabaseReader{
         }
     }
 
-
+    /**
+     * Building a string in the right formatting.
+     * @param result
+     * @return String
+     */
     private String buildString(ResultSet result){
         try {
             StringBuilder stringResult = new StringBuilder();
@@ -130,7 +168,11 @@ public class DatabaseReader{
         }
     }
 
-
+    /**
+     *
+     * @param result
+     * @return Returns column names in a table.
+     */
     private String getColumnNamesFromTable(ResultSet result){
         try {
             ResultSetMetaData columnNames = result.getMetaData();

@@ -13,7 +13,6 @@ public class DataConverter {
         setDataTypes(dataTypes);
         setColumnNames(columnNames);
         setLinesColumnsFromFile(linesInFile);
-//        checkRightAmountOfColumns();
     }
 
     public String[][] getLinesAndColumnsFromFile() {
@@ -67,22 +66,14 @@ public class DataConverter {
         this.columnNames = columnNames;
     }
 
+    /**
+     * Check to see if primary key contains auto increment. Used to decide if it could
+     * accept one less column in the content.
+     * @return True or False
+     */
     public boolean checkForAutoIncrementInTable(){
         String primaryKeyDataType = getDataTypes()[0];
         return primaryKeyDataType.contains("AUTO_INCREMENT");
     }
-
-
-//    public boolean checkRightAmountOfColumns(){
-//        boolean rightAmountOfColumns;
-//        rightAmountOfColumns = dataTypes.length == columnNames.length;
-//        int index = 0;
-//        if (checkForAutoIncrementInTable()) index = 1;
-//        int lines = getLinesAndColumnsFromFile()[0].length;
-//        for (int i = 0; i < lines; i++) {
-//            rightAmountOfColumns = getLinesAndColumnsFromFile()[i].length == (dataTypes.length - index);
-//        }
-//        return rightAmountOfColumns;
-//    }
 
 }

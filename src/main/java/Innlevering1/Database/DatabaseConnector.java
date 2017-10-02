@@ -16,7 +16,9 @@ public class DatabaseConnector implements DatabaseInterface{
     private Properties prop;
     private MysqlDataSource dataSource;
 
-
+    /**
+     * Reads the property file
+     */
     public DatabaseConnector(String properties){
         try {
             prop = new Properties();
@@ -34,6 +36,10 @@ public class DatabaseConnector implements DatabaseInterface{
     }
 
 
+    /**
+     *
+     * @return connections to server
+     */
     @Override
     public Connection getConnection() {
         try {
@@ -51,6 +57,10 @@ public class DatabaseConnector implements DatabaseInterface{
         }
     }
 
+    /**
+     * Creats and set the database name
+     * @param connection
+     */
     private void createAndSetDatabase(Connection connection){
         try {
             Statement statement = connection.createStatement();

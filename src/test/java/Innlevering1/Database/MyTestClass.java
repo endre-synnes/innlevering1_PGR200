@@ -10,9 +10,8 @@ import java.sql.Connection;
 
 import static org.junit.Assert.*;
 
-public class DatabaseConnectorTest {
+public class MyTestClass {
 
-    private Connection db;
     private DatabaseConnector dbConnector;
 
     @Before
@@ -27,7 +26,6 @@ public class DatabaseConnectorTest {
 
     @Test
     public void getConnectionToDatabase() throws Exception {
-        //db = new DatabaseConnector().getConnection();
         assertNotNull(dbConnector.getConnection());
     }
 
