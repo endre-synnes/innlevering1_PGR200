@@ -99,7 +99,6 @@ public class DatabaseReader{
     }
 
     public boolean tableExist(String tableName){
-        //TODO få denne til å funke
         try (Connection connection = dbConnector.getConnection()) {
             DatabaseMetaData dbMetaData = connection.getMetaData();
             ResultSet tables = dbMetaData.getTables(null, null, tableName, null);
@@ -115,19 +114,38 @@ public class DatabaseReader{
     private String buildString(ResultSet result){
         try {
             StringBuilder stringResult = new StringBuilder();
-            stringResult.append("-------------------------------------------------\n");
+            stringResult.append(getColumnNamesFromTable(result));
             int columnCount = result.getMetaData().getColumnCount();
             while (result.next()){
+                stringResult.append("\n");
                 for (int i = 0; i < columnCount; i++) {
                     stringResult.append(String.format("%-30s", result.getString(i + 1)));
                 }
-                stringResult.append("\n");
             }
+            stringResult.append("\n");
             if (stringResult.length() == 0) return "No lines";
-            stringResult.append("-------------------------------------------------");
             return stringResult.toString();
         } catch (Exception e){
             return "Error while creating print!";
+        }
+    }
+
+
+    private String getColumnNamesFromTable(ResultSet result){
+        try {
+            ResultSetMetaData columnNames = result.getMetaData();
+            int columnCount = columnNames.getColumnCount();
+            StringBuilder stringColumnNames = new StringBuilder();
+            for (int i = 0; i < columnCount; i++) {
+                stringColumnNames.append(String.format("%-30s", columnNames.getColumnName(i+1)));
+            }
+            stringColumnNames.append("\n");
+            for (int i = 0; i < 80; i++) { stringColumnNames.append("-"); }
+            return stringColumnNames.toString();
+
+
+        }catch (SQLException e){
+            return "Could not read column names";
         }
     }
 

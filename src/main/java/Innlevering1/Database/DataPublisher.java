@@ -27,7 +27,7 @@ public class DataPublisher {
 
             statement.executeUpdate(sqlSyntax);
             //if (dataConverterFromFile.getLinesAndColumnsFromFile() != null)insertData(dataConverterFromFile);
-            return "Successfully created table";
+            return "Successfully created table!";
         } catch (Exception e) {
             return "Could not create table, check if format in file is invalid!";
         }
@@ -63,7 +63,6 @@ public class DataPublisher {
                 if (i < lines.length - 1) sqlSyntax += "), ";
             }
             sqlSyntax += ");";
-            //System.out.println(sqlSyntax);
             int result = statement.executeUpdate(sqlSyntax);
             return "Objects inserted to table: " + result;
         }catch (Exception e){

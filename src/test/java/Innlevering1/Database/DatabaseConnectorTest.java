@@ -22,7 +22,7 @@ public class DatabaseConnectorTest {
 
     @After
     public void tearDown() throws Exception {
-        db = null;
+        dbConnector = null;
     }
 
     @Test
@@ -44,7 +44,7 @@ public class DatabaseConnectorTest {
         CSVFileReader reader = new CSVFileReader();
         DataConverter convertedFile = reader.read("subject");
         DataPublisher publisher = new DataPublisher(dbConnector);
-        assertEquals("Successfully created table", publisher.createTable(convertedFile));
+        assertEquals("Successfully created table!", publisher.createTable(convertedFile));
     }
 
     @Test

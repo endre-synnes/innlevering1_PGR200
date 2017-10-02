@@ -13,7 +13,6 @@ public class CSVFileReader {
 
     public DataConverter read(String filename) {
         try {
-            System.out.println("Reading file...");
             linesInFile = new ArrayList<>();
             Scanner reader = new Scanner(new java.io.FileReader(filename+".csv"));
             tableName = reader.nextLine();

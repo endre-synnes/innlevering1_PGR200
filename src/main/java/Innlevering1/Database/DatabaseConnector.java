@@ -14,10 +14,7 @@ public class DatabaseConnector implements DatabaseInterface{
     private static String password;
     private static int port;
     private Properties prop;
-
-    public DatabaseConnector(){
-        //this("DatabaseProperties.properties");
-    }
+    private MysqlDataSource dataSource;
 
 
     public DatabaseConnector(String properties){
@@ -30,8 +27,8 @@ public class DatabaseConnector implements DatabaseInterface{
             userName = prop.getProperty("userName");
             password = prop.getProperty("password");
             port = Integer.parseInt(prop.getProperty("port"));
+            dropDatabaseIfExist(getConnection());
         }catch (Exception e){
-            //e.getStackTrace();
             System.out.println("Could not read property file correctly!");
         }
     }
@@ -40,17 +37,36 @@ public class DatabaseConnector implements DatabaseInterface{
     @Override
     public Connection getConnection() {
         try {
-            MysqlDataSource dataSource = new MysqlDataSource();
+            dataSource = new MysqlDataSource();
             dataSource.setServerName(hostName);
-            dataSource.setDatabaseName(dbName);
             dataSource.setUser(userName);
             dataSource.setPassword(password);
             dataSource.setPort(port);
+            createAndSetDatabase(dataSource.getConnection());
             return dataSource.getConnection();
         }catch (SQLException dbException){
-            System.out.println("Could not connect to server, please check the property file or your username/password!");
+            System.out.println("Could not connect to server, please check the DB Name file or your username/password!");
             System.exit(0);
             return null;
+        }
+    }
+
+    private void createAndSetDatabase(Connection connection){
+        try {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate("CREATE DATABASE IF NOT EXISTS " + dbName);
+            dataSource.setDatabaseName(dbName);
+        }catch (SQLException e){
+            System.out.println("Could not set or create Database");
+        }
+    }
+
+    private void dropDatabaseIfExist (Connection connection){
+        try {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate("DROP DATABASE IF EXISTS " + dbName);
+        }catch (SQLException e){
+            System.out.println("Failed to drop Database");
         }
     }
 
@@ -61,13 +77,5 @@ public class DatabaseConnector implements DatabaseInterface{
         port = 0;
         hostName = null;
         prop = null;
-    }
-
-    public static void main(String[] args) throws Exception {
-        DatabaseConnector db = new DatabaseConnector();
-        if (db.getConnection() != null){
-            System.out.println("Successful connection!");
-        }
-        else System.out.println("no connection!");
     }
 }

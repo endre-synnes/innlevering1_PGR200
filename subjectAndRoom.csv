@@ -1,4 +1,4 @@
-SubjectAndRoom;
+subjectAndRoom;
 subjectId;roomId;
 VARCHAR(11) NOT NULL;VARCHAR(11) NOT NULL;
 subjectId;roomId;
