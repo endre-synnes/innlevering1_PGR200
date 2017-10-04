@@ -80,12 +80,4 @@ public class DatabaseConnector implements DatabaseInterface{
         }
     }
 
-    public void close() throws SQLException {
-        userName = null;
-        password = null;
-        dbName = null;
-        port = 0;
-        hostName = null;
-        prop = null;
-    }
 }

@@ -8,5 +8,4 @@ public interface DatabaseInterface {
     public Connection getConnection() throws SQLException;
 
 
-    public void close() throws SQLException;
 }
