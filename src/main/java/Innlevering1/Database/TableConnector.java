@@ -32,10 +32,7 @@ public class TableConnector {
             return "successfully connected " + mainTable + " and " + secondTable;
 
         }catch (SQLException e){
-            if (e.getErrorCode() == 1022) return "This constraint already exist!";
-            if (e.getErrorCode() == 1146 || e.getErrorCode() == 1215 || e.getErrorCode() == 1072) return "Check your table or column name!";
-            if (e.getErrorCode() == 1452) return "At least one row in the child table that references a non-existent row in the parent table";
-            return "Failed to connect tables, error code: " + e.getErrorCode() + ". Could be wrong formatting!";
+            return SQLExceptionHandler.sqlErrorCode(e.getErrorCode());
 
         }
 

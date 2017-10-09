@@ -13,15 +13,14 @@ public class DatabaseConnector implements DatabaseInterface{
     private static String userName;
     private static String password;
     private static int port;
-    private Properties prop;
     private MysqlDataSource dataSource;
 
     /**
      * Reads the property file
      */
-    public DatabaseConnector(String properties){
+    public DatabaseConnector(String properties) {
         try {
-            prop = new Properties();
+            Properties prop = new Properties();
             FileInputStream fileInputStream = new FileInputStream(properties);
             prop.load(fileInputStream);
             hostName = prop.getProperty("hostName");
@@ -41,7 +40,7 @@ public class DatabaseConnector implements DatabaseInterface{
      * @return connections to server
      */
     @Override
-    public Connection getConnection() {
+    public Connection getConnection(){
         try {
             dataSource = new MysqlDataSource();
             dataSource.setServerName(hostName);

@@ -6,13 +6,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.sql.Connection;
-
 import static org.junit.Assert.*;
 
-public class MyTestClass {
-
+public class DataPublisherTest {
     private DatabaseConnector dbConnector;
+
 
     @Before
     public void setUp() throws Exception {
@@ -22,19 +20,6 @@ public class MyTestClass {
     @After
     public void tearDown() throws Exception {
         dbConnector = null;
-    }
-
-    @Test
-    public void getConnectionToDatabase() throws Exception {
-        assertNotNull(dbConnector.getConnection());
-    }
-
-    @Test
-    public void ableToReadPrimaryKeyCorrectly() throws Exception {
-        CSVFileReader reader = new CSVFileReader();
-        DataConverter convertedFile = reader.read("subject");
-        String primaryKey = convertedFile.getPrimaryKey();
-        assertEquals("id", primaryKey);
     }
 
     @Test
@@ -62,4 +47,5 @@ public class MyTestClass {
         DatabaseReader databaseReader = new DatabaseReader(dbConnector);
         assertTrue(databaseReader.tableExist(tableName));
     }
+
 }

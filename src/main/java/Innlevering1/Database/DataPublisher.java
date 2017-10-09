@@ -5,6 +5,7 @@ import Innlevering1.DataConverter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class DataPublisher {
     private DatabaseConnector dbConnector;
@@ -30,10 +31,9 @@ public class DataPublisher {
             sqlSyntax += "PRIMARY KEY(" + dataConverterFromFile.getPrimaryKey() + "));";
 
             statement.executeUpdate(sqlSyntax);
-            //if (dataConverterFromFile.getLinesAndColumnsFromFile() != null)insertData(dataConverterFromFile);
             return "Successfully created table!";
-        } catch (Exception e) {
-            return "Could not create table, check if format in file is invalid!";
+        } catch (SQLException e) {
+            return SQLExceptionHandler.sqlErrorCode(e.getErrorCode());
         }
 
 
@@ -74,8 +74,9 @@ public class DataPublisher {
             sqlSyntax += ");";
             int result = statement.executeUpdate(sqlSyntax);
             return "Objects inserted to table: " + result;
-        }catch (Exception e){
-            return "Could not insert data. Could be duplicates or check if format in file is invalid!";
+        }catch (SQLException e){
+            System.out.println(e.getErrorCode());
+            return SQLExceptionHandler.sqlErrorCode(e.getErrorCode());
         }
     }
 
