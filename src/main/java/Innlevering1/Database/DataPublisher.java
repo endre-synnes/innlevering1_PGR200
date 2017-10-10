@@ -1,10 +1,9 @@
 package Innlevering1.Database;
 
-import Innlevering1.DataConverter;
+import Innlevering1.Table;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DataPublisher {
@@ -16,19 +15,19 @@ public class DataPublisher {
 
     /**
      * Creating a table or overwrites it if the table already exists.
-     * @param dataConverterFromFile
+     * @param tableFromFile
      * @return String explaining if i succeeded.
      */
-    public String createTable(DataConverter dataConverterFromFile) {
+    public String createTable(Table tableFromFile) {
         try (Connection connection = dbConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement("")){
-            statement.execute("DROP TABLE IF EXISTS " + dataConverterFromFile.getTableName());
-            String sqlSyntax = "CREATE TABLE " + dataConverterFromFile.getTableName() + " (";
-            for (int i = 0; i < dataConverterFromFile.getColumnNames().length; i++) {
-                sqlSyntax += dataConverterFromFile.getColumnNames()[i] + " "
-                        + dataConverterFromFile.getDataTypes()[i] + ",";
+            statement.execute("DROP TABLE IF EXISTS " + tableFromFile.getTableName());
+            String sqlSyntax = "CREATE TABLE " + tableFromFile.getTableName() + " (";
+            for (int i = 0; i < tableFromFile.getColumnNames().length; i++) {
+                sqlSyntax += tableFromFile.getColumnNames()[i] + " "
+                        + tableFromFile.getDataTypes()[i] + ",";
             }
-            sqlSyntax += "PRIMARY KEY(" + dataConverterFromFile.getPrimaryKey() + "));";
+            sqlSyntax += "PRIMARY KEY(" + tableFromFile.getPrimaryKey() + "));";
 
             statement.executeUpdate(sqlSyntax);
             return "Successfully created table!";
@@ -44,40 +43,50 @@ public class DataPublisher {
      * @param convertedFile
      * @return String explaining if i succeeded.
      */
-    public String insertData(DataConverter convertedFile) {
+    //TODO få denne til å funke
+    public String insertData(Table convertedFile) {
         try (Connection connection = dbConnector.getConnection();
-             PreparedStatement statement = connection.prepareStatement("")){
+             PreparedStatement statement = connection.prepareStatement(stringBuilding(convertedFile))){
 
-            ResultSet doesTableExist = connection.getMetaData()
-                    .getTables(null, null, convertedFile.getTableName(), null);
-            if (!doesTableExist.next()) return "No table with that name!";
-
-            int index = 0;
-            if (convertedFile.checkForAutoIncrementInTable()) index = 1;
-
-            String sqlSyntax = "INSERT INTO " + convertedFile.getTableName() + " (";
-            for (int i = index; i < convertedFile.getColumnNames().length; i++) {
-                sqlSyntax += convertedFile.getColumnNames()[i];
-                if (i < convertedFile.getColumnNames().length -1) sqlSyntax += ", ";
-
-            }
-            sqlSyntax += ") VALUES ";
-            String[][] lines = convertedFile.getLinesAndColumnsFromFile();
-            for (int i = 0; i < lines.length; i++) {
-                sqlSyntax += "(";
-                for (int j = 0; j < lines[0].length; j++) {
-                    sqlSyntax += "'" + lines[i][j] + "'";
-                    if (j < lines[0].length - 1) sqlSyntax += ", ";
+            int index = 1;
+            for (int i = 0; i < convertedFile.getLinesAndColumnsFromFile().length; i++) {
+                for (int j = 0; j < convertedFile.getLinesAndColumnsFromFile()[i].length; j++) {
+                    statement.setString(index++, convertedFile.getLinesAndColumnsFromFile()[i][j]);
                 }
-                if (i < lines.length - 1) sqlSyntax += "), ";
             }
-            sqlSyntax += ");";
-            int result = statement.executeUpdate(sqlSyntax);
-            return "Objects inserted to table: " + result;
-        }catch (SQLException e){
-            System.out.println(e.getErrorCode());
+
+            int linesInserted = statement.executeUpdate();
+            return "Successfully inserted " + linesInserted + " rows to table";
+        } catch (SQLException e){
             return SQLExceptionHandler.sqlErrorCode(e.getErrorCode());
         }
     }
+
+    //TODO: Opprette string til insertDataToTable metoden
+    private String stringBuilding(Table converter){
+        StringBuilder sqlString = new StringBuilder();
+        sqlString.append("INSERT INTO ");
+        sqlString.append(converter.getTableName());
+        sqlString.append("(");
+        int startColumn = 0;
+        if (converter.checkForAutoIncrementInTable()) startColumn = 1;
+        int columnCount = converter.getColumnNames().length;
+
+        for (int i = startColumn; i < columnCount; i++) {
+            sqlString.append(converter.getColumnNames()[i]);
+            if (i+1 < columnCount){
+                sqlString.append(",");
+            }
+        }
+        sqlString.append(")\nVALUES\n(");
+        for (int i = 0; i < converter.getLinesAndColumnsFromFile().length; i++) {
+            for (int j = 0; j < converter.getLinesAndColumnsFromFile()[i].length - 1; j++) {
+                sqlString.append("?" + ", ");
+            }
+            sqlString.append("?" + "),\n(");
+        }
+        return sqlString.toString().substring(0, sqlString.length() - 3);
+    }
+
 
 }

@@ -74,7 +74,7 @@ Comment (Things I could have done better):
 
     I know that i might have used PreperedStatement better, so that is is 
     sercured for SQL-injection. The reason i found this difficult was because
-    of my dynamic reading of files. I could also made my CSVFileReader better.
+    of my dynamic reading of files. I could also made my FileReader better.
     
     
 Comment (Things i think is good):

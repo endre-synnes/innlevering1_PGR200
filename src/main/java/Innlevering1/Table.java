@@ -2,12 +2,14 @@ package Innlevering1;
 
 import java.util.ArrayList;
 
-public class DataConverter {
+public class Table {
     private String primaryKey, tableName;
     private String[] dataTypes, columnNames;
     private String[][] tableFromLinesInFile;
 
-    public DataConverter(ArrayList<String> linesInFile, String primaryKey, String tableName, String[] dataTypes, String[] columnNames) {
+    public Table(){}
+
+    public Table(ArrayList<String> linesInFile, String primaryKey, String tableName, String[] dataTypes, String[] columnNames) {
         setPrimaryKey(primaryKey);
         setTableName(tableName);
         setDataTypes(dataTypes);

@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class CSVFileReaderTest {
+public class FileReaderTest {
     @Before
     public void setUp() throws Exception {
     }
@@ -17,9 +17,10 @@ public class CSVFileReaderTest {
 
     @Test
     public void ableToReadPrimaryKeyCorrectly() throws Exception {
-        CSVFileReader reader = new CSVFileReader();
-        DataConverter convertedFile = reader.read("subject");
-        String primaryKey = convertedFile.getPrimaryKey();
+        FileReader reader = new FileReader();
+        Table table = new Table();
+        table = reader.read("subject", table);
+        String primaryKey = table.getPrimaryKey();
         assertEquals("id", primaryKey);
     }
 }

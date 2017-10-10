@@ -92,10 +92,11 @@ public class Application {
 
     private void readFileAndPublish(){
         System.out.println("\nEnter name of file:");
-        CSVFileReader CSVFileReader = new CSVFileReader();
-        DataConverter dataConverter = CSVFileReader.read(scanner.nextLine());
-        System.out.println(publisher.createTable(dataConverter));
-        System.out.println(publisher.insertData(dataConverter) + "\n");
+        Table table = new Table();
+        FileReader FileReader = new FileReader();
+        table = FileReader.read(scanner.nextLine(), table);
+        System.out.println(publisher.createTable(table));
+        System.out.println(publisher.insertData(table) + "\n");
     }
 
     private void getAllTables(){
@@ -151,14 +152,15 @@ public class Application {
 
 
     private void readAllExampleFiles(){
-        CSVFileReader fileReader = new CSVFileReader();
+        FileReader fileReader = new FileReader();
         String[] fileNames = {"availability", "lecturer", "lecturerAndSubject",
                 "program", "room", "semester", "subject", "subjectAndProgram",
                 "SubjectAndRoom"};
         for (String fileName: fileNames) {
-            DataConverter dataConverter = fileReader.read(fileName);
-            publisher.createTable(dataConverter);
-            publisher.insertData(dataConverter);
+            Table table = new Table();
+            table = fileReader.read(fileName, table);
+            publisher.createTable(table);
+            publisher.insertData(table);
         }
         System.out.println("All tables read.\n");
     }

@@ -1,12 +1,10 @@
 package Innlevering1.Database;
 
-import Innlevering1.CSVFileReader;
-import Innlevering1.DataConverter;
+import Innlevering1.FileReader;
+import Innlevering1.Table;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class DatabaseReaderTest {
     private DatabaseConnector dbConnector;
@@ -25,11 +23,12 @@ public class DatabaseReaderTest {
     @Test
     public void countNumberOfRowsInTable() throws Exception {
         //Read file
-        CSVFileReader fileReader = new CSVFileReader();
-        DataConverter convertedFile = fileReader.read("testFiles/roomTest");
+        FileReader fileReader = new FileReader();
+        Table table = new Table();
+        table = fileReader.read("testFiles/roomTest", table);
         DataPublisher publisher = new DataPublisher(dbConnector);
-        publisher.createTable(convertedFile);
-        publisher.insertData(convertedFile);
+        publisher.createTable(table);
+        publisher.insertData(table);
 
         String dbReader = new DatabaseReader(dbConnector).countRowsInTable("testFiles/roomTest");
     }

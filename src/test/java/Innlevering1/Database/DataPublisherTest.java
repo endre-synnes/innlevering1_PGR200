@@ -1,7 +1,7 @@
 package Innlevering1.Database;
 
-import Innlevering1.CSVFileReader;
-import Innlevering1.DataConverter;
+import Innlevering1.FileReader;
+import Innlevering1.Table;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,10 +24,11 @@ public class DataPublisherTest {
 
     @Test
     public void ableToCreateTable() throws Exception {
-        CSVFileReader reader = new CSVFileReader();
-        DataConverter convertedFile = reader.read("subject");
+        FileReader reader = new FileReader();
+        Table table = new Table();
+        table = reader.read("testFiles/subjectTest", table);
         DataPublisher publisher = new DataPublisher(dbConnector);
-        assertEquals("Successfully created table!", publisher.createTable(convertedFile));
+        assertEquals("Successfully created table!", publisher.createTable(table));
     }
 
     @Test
@@ -36,12 +37,13 @@ public class DataPublisherTest {
         String tableName = "subject";
 
         //Reading file
-        CSVFileReader fileReader = new CSVFileReader();
-        DataConverter convertedFile = fileReader.read(tableName);
+        FileReader fileReader = new FileReader();
+        Table table = new Table();
+        table = fileReader.read(tableName, table);
 
         //Publishing table
         DataPublisher publisher = new DataPublisher(dbConnector);
-        publisher.createTable(convertedFile);
+        publisher.createTable(table);
 
         //Checking if table exist
         DatabaseReader databaseReader = new DatabaseReader(dbConnector);
