@@ -15,11 +15,10 @@ public class FileReader {
      * @param filename
      * @return converted file
      */
-    public Table read(String filename, Table table) {
+    public Table createTableObject(String filename, Table table) {
         try {
             ArrayList<String> file = readFile(filename);
             ArrayList data = new ArrayList<>();
-            //Scanner reader = new Scanner(new java.io.FileReader("docs/files/" + filename+".csv"));
             table.setTableName(file.get(0));
             table.setColumnNames(file.get(1).split(";"));
             table.setDataTypes(file.get(2).split(";"));
@@ -28,17 +27,6 @@ public class FileReader {
                 data.add(file.get(i));
             }
             table.setLinesColumnsFromFile(data);
-
-
-//            tableName = reader.nextLine();
-//            columnNames = reader.nextLine().split(";");
-//            dataTypes = reader.nextLine().split(";");
-//            primaryKey = reader.nextLine();
-
-            //while (reader.hasNext()) file.add(reader.nextLine());
-            //reader.close();
-            //table = new Table(file, primaryKey, tableName, dataTypes, columnNames);
-            //if (!table.checkRightAmountOfColumns()) return null;
             return table;
         }
         catch (Exception e){

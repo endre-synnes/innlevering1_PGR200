@@ -25,7 +25,7 @@ public class DatabaseReaderTest {
         //Read file
         FileReader fileReader = new FileReader();
         Table table = new Table();
-        table = fileReader.read("testFiles/roomTest", table);
+        table = fileReader.createTableObject("testFiles/roomTest", table);
         DataPublisher publisher = new DataPublisher(dbConnector);
         publisher.createTable(table);
         publisher.insertData(table);

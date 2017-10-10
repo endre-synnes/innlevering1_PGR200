@@ -30,7 +30,7 @@ public class DatabaseConnector implements DatabaseInterface{
             port = Integer.parseInt(prop.getProperty("port"));
             dropDatabaseIfExist(getConnection());
         }catch (Exception e){
-            System.out.println("Could not read property file correctly!");
+            System.out.println("Could not createTableObject property file correctly!");
         }
     }
 

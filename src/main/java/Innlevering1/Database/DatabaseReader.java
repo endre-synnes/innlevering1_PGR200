@@ -123,7 +123,7 @@ public class DatabaseReader{
             resultString.append("----------------------------------------");
             return resultString;
         }catch (SQLException e){
-            return new StringBuilder().append("Could not read table");
+            return new StringBuilder().append("Could not createTableObject table");
         }
     }
 
@@ -187,7 +187,7 @@ public class DatabaseReader{
 
 
         }catch (SQLException e){
-            return "Could not read column names";
+            return "Could not createTableObject column names";
         }
     }
 

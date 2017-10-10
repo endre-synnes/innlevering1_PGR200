@@ -19,7 +19,7 @@ public class FileReaderTest {
     public void ableToReadPrimaryKeyCorrectly() throws Exception {
         FileReader reader = new FileReader();
         Table table = new Table();
-        table = reader.read("subject", table);
+        table = reader.createTableObject("subject", table);
         String primaryKey = table.getPrimaryKey();
         assertEquals("id", primaryKey);
     }

@@ -26,7 +26,7 @@ public class DataPublisherTest {
     public void ableToCreateTable() throws Exception {
         FileReader reader = new FileReader();
         Table table = new Table();
-        table = reader.read("testFiles/subjectTest", table);
+        table = reader.createTableObject("testFiles/subjectTest", table);
         DataPublisher publisher = new DataPublisher(dbConnector);
         assertEquals("Successfully created table!", publisher.createTable(table));
     }
@@ -39,7 +39,7 @@ public class DataPublisherTest {
         //Reading file
         FileReader fileReader = new FileReader();
         Table table = new Table();
-        table = fileReader.read(tableName, table);
+        table = fileReader.createTableObject(tableName, table);
 
         //Publishing table
         DataPublisher publisher = new DataPublisher(dbConnector);

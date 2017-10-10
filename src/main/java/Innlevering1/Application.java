@@ -94,7 +94,7 @@ public class Application {
         System.out.println("\nEnter name of file:");
         Table table = new Table();
         FileReader FileReader = new FileReader();
-        table = FileReader.read(scanner.nextLine(), table);
+        table = FileReader.createTableObject(scanner.nextLine(), table);
         System.out.println(publisher.createTable(table));
         System.out.println(publisher.insertData(table) + "\n");
     }
@@ -158,11 +158,11 @@ public class Application {
                 "SubjectAndRoom"};
         for (String fileName: fileNames) {
             Table table = new Table();
-            table = fileReader.read(fileName, table);
+            table = fileReader.createTableObject(fileName, table);
             publisher.createTable(table);
             publisher.insertData(table);
         }
-        System.out.println("All tables read.\n");
+        System.out.println("All tables createTableObject.\n");
     }
 
 
