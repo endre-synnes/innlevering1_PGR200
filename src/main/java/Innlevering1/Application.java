@@ -95,8 +95,8 @@ public class Application {
         Table table = new Table();
         FileReader FileReader = new FileReader();
         table = FileReader.createTableObject(scanner.nextLine(), table);
-        System.out.println(publisher.createTable(table));
-        System.out.println(publisher.insertData(table) + "\n");
+        System.out.println(publisher.createTableInDatabase(table));
+        System.out.println(publisher.insertDataToDatabase(table) + "\n");
     }
 
     private void getAllTables(){
@@ -159,8 +159,8 @@ public class Application {
         for (String fileName: fileNames) {
             Table table = new Table();
             table = fileReader.createTableObject(fileName, table);
-            publisher.createTable(table);
-            publisher.insertData(table);
+            publisher.createTableInDatabase(table);
+            publisher.insertDataToDatabase(table);
         }
         System.out.println("All tables createTableObject.\n");
     }

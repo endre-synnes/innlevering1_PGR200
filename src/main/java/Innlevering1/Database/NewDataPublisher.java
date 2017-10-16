@@ -15,7 +15,6 @@
 //        this.dbConnector = dbConnector;
 //    }
 //
-//    //TODO: Ferdigstille metode
 //    public String insertDataToTable(Table convertedFile){
 //        try (Connection connection = dbConnector.getConnection();
 //             PreparedStatement statement = connection.prepareStatement(stringBuilding(convertedFile))){
@@ -34,7 +33,6 @@
 //        }
 //    }
 //
-//    //TODO: Opprette string til insertDataToTable metoden
 //    private String stringBuilding(Table converter){
 //        StringBuilder sqlString = new StringBuilder();
 //        sqlString.append("INSERT INTO ");
@@ -76,7 +74,7 @@
 //            DataPublisher oldDbPublisher = new DataPublisher(dbConnector);
 //            NewDataPublisher newDataPublisher = new NewDataPublisher(dbConnector);
 //
-//            oldDbPublisher.createTable(dataConverter);
+//            oldDbPublisher.createTableInDatabase(dataConverter);
 //            System.out.println(newDataPublisher.insertDataToTable(dataConverter));
 //
 //        } catch (Exception e){

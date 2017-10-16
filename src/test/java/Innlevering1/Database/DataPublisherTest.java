@@ -28,7 +28,7 @@ public class DataPublisherTest {
         Table table = new Table();
         table = reader.createTableObject("testFiles/subjectTest", table);
         DataPublisher publisher = new DataPublisher(dbConnector);
-        assertEquals("Successfully created table!", publisher.createTable(table));
+        assertEquals("Successfully created table!", publisher.createTableInDatabase(table));
     }
 
     @Test
@@ -43,7 +43,7 @@ public class DataPublisherTest {
 
         //Publishing table
         DataPublisher publisher = new DataPublisher(dbConnector);
-        publisher.createTable(table);
+        publisher.createTableInDatabase(table);
 
         //Checking if table exist
         DatabaseReader databaseReader = new DatabaseReader(dbConnector);

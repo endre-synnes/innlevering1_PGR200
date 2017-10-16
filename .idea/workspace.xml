@@ -2,15 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a24cd784-f7a6-46b6-9412-79ba5ae2a5e3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/08284fb6-e899-4fb0-88a5-3f6d7bf34699.xml" afterPath="$PROJECT_DIR$/.idea/dataSources/08284fb6-e899-4fb0-88a5-3f6d7bf34699.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Innlevering1/Application.java" afterPath="$PROJECT_DIR$/src/main/java/Innlevering1/Application.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Innlevering1/Database/DatabaseConnector.java" afterPath="$PROJECT_DIR$/src/main/java/Innlevering1/Database/DatabaseConnector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Innlevering1/Database/DatabaseReader.java" afterPath="$PROJECT_DIR$/src/main/java/Innlevering1/Database/DatabaseReader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Innlevering1/Database/DataPublisher.java" afterPath="$PROJECT_DIR$/src/main/java/Innlevering1/Database/DataPublisher.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Innlevering1/Database/NewDataPublisher.java" afterPath="$PROJECT_DIR$/src/main/java/Innlevering1/Database/NewDataPublisher.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Innlevering1/FileReader.java" afterPath="$PROJECT_DIR$/src/main/java/Innlevering1/FileReader.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/Innlevering1/Database/DataPublisherTest.java" afterPath="$PROJECT_DIR$/src/test/java/Innlevering1/Database/DataPublisherTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/Innlevering1/Database/DatabaseReaderTest.java" afterPath="$PROJECT_DIR$/src/test/java/Innlevering1/Database/DatabaseReaderTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/Innlevering1/FileReaderTest.java" afterPath="$PROJECT_DIR$/src/test/java/Innlevering1/FileReaderTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -53,243 +51,79 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="JAVA/Innlevering1" pinned="false" current-in-tab="false">
-        <entry file="uml://JAVA/Innlevering1">
-          <provider selected="true" editor-type-id="UmlEditorProvider">
-            <state>
-              <ID>JAVA</ID>
-              <OriginalElement>Innlevering1</OriginalElement>
-              <nodes>
-                <node x="344.0" y="995.0">Innlevering1.Database.TableConnector</node>
-                <node x="2296.30788062384" y="1678.5">Innlevering1.Database.DatabaseReaderTest</node>
-                <node x="1100.146769512729" y="221.0">Innlevering1.Database.DatabaseConnector</node>
-                <node x="2638.798414308905" y="1692.5">Innlevering1.FileReaderTest</node>
-                <node x="834.877756841373" y="1462.0">Innlevering1.Application</node>
-                <node x="0.0" y="995.0">Innlevering1.Database.TableManager</node>
-                <node x="858.0" y="982.0">Innlevering1.Database.DatabaseConnectorTest</node>
-                <node x="312.98010284606244" y="330.0">Innlevering1.Database.SQLExceptionHandler</node>
-                <node x="2031.396769512729" y="113.0">Innlevering1.Table</node>
-                <node x="2182.146769512729" y="927.5">Innlevering1.FileReader</node>
-                <node x="1142.146769512729" y="0.0">Innlevering1.Database.DatabaseInterface</node>
-                <node x="1802.0" y="968.0">Innlevering1.Database.DataPublisher</node>
-                <node x="1216.0" y="887.0">Innlevering1.Database.DatabaseReader</node>
-                <node x="1659.8822211270872" y="1665.0">Innlevering1.Database.DataPublisherTest</node>
-              </nodes>
-              <notes />
-              <edges>
-                <edge source="Innlevering1.Application" target="Innlevering1.Table">
-                  <point x="13.53571428571422" y="-289.0" />
-                  <point x="1037.9134711270872" y="1302.0" />
-                  <point x="1205.5" y="1302.0" />
-                  <point x="1205.5" y="857.0" />
-                  <point x="2093.30586042182" y="857.0" />
-                  <point x="-165.09090909090912" y="262.0" />
-                </edge>
-                <edge source="Innlevering1.Database.DataPublisherTest" target="Innlevering1.Database.DatabaseConnector">
-                  <point x="26.600000000000023" y="-86.0" />
-                  <point x="1952.482221127087" y="1382.0" />
-                  <point x="2143.5" y="1382.0" />
-                  <point x="2143.5" y="717.0" />
-                  <point x="1397.990519512729" y="717.0" />
-                  <point x="121.34375" y="154.0" />
-                </edge>
-                <edge source="Innlevering1.Database.DataPublisherTest" target="Innlevering1.Database.DatabaseReader">
-                  <point x="-239.39999999999992" y="-86.0" />
-                  <point x="1686.4822211270873" y="1322.0" />
-                  <point x="1499.0" y="1322.0" />
-                  <point x="0.0" y="167.5" />
-                </edge>
-                <edge source="Innlevering1.Application" target="Innlevering1.Database.TableConnector">
-                  <point x="-94.75" y="-289.0" />
-                  <point x="929.627756841373" y="1412.0" />
-                  <point x="714.5" y="1412.0" />
-                  <point x="123.5" y="59.5" />
-                </edge>
-                <edge source="Innlevering1.Database.TableManager" target="Innlevering1.Database.DatabaseConnector">
-                  <point x="0.0" y="-59.5" />
-                  <point x="162.0" y="767.0" />
-                  <point x="1111.178019512729" y="767.0" />
-                  <point x="-165.46875" y="154.0" />
-                </edge>
-                <edge source="Innlevering1.Application" target="Innlevering1.Database.TableManager">
-                  <point x="-175.96428571428567" y="-289.0" />
-                  <point x="848.4134711270873" y="1442.0" />
-                  <point x="81.0" y="1442.0" />
-                  <point x="-81.0" y="59.5" />
-                </edge>
-                <edge source="Innlevering1.Database.DataPublisher" target="Innlevering1.Table">
-                  <point x="120.0" y="-86.5" />
-                  <point x="2082.0" y="867.0" />
-                  <point x="2134.578587694547" y="867.0" />
-                  <point x="-123.81818181818187" y="262.0" />
-                </edge>
-                <edge source="Innlevering1.Database.DatabaseConnectorTest" target="Innlevering1.Database.DatabaseConnector">
-                  <point x="-76.0" y="-72.5" />
-                  <point x="934.0" y="807.0" />
-                  <point x="1199.428019512729" y="807.0" />
-                  <point x="-77.21875" y="154.0" />
-                </edge>
-                <edge source="Innlevering1.Database.DataPublisher" target="Innlevering1.Database.DatabaseConnector">
-                  <point x="-40.0" y="-86.5" />
-                  <point x="1922.0" y="747.0" />
-                  <point x="1331.803019512729" y="747.0" />
-                  <point x="55.15625" y="154.0" />
-                </edge>
-                <edge source="Innlevering1.FileReaderTest" target="Innlevering1.FileReader">
-                  <point x="-42.375" y="-58.5" />
-                  <point x="2765.923414308905" y="1242.0" />
-                  <point x="2468.084269512729" y="1242.0" />
-                  <point x="133.4375" y="127.0" />
-                </edge>
-                <edge source="Innlevering1.Database.DatabaseReaderTest" target="Innlevering1.Database.DataPublisher">
-                  <point x="-70.44444444444446" y="-72.5" />
-                  <point x="2384.3634361793956" y="1282.0" />
-                  <point x="2095.3333333333335" y="1282.0" />
-                  <point x="133.33333333333348" y="86.5" />
-                </edge>
-                <edge source="Innlevering1.Database.DataPublisherTest" target="Innlevering1.Table">
-                  <point x="79.80000000000007" y="-86.0" />
-                  <point x="2005.6822211270874" y="1392.0" />
-                  <point x="2154.5" y="1392.0" />
-                  <point x="2154.5" y="857.0" />
-                  <point x="2175.8513149672744" y="857.0" />
-                  <point x="-82.5454545454545" y="262.0" />
-                </edge>
-                <edge source="Innlevering1.Database.DataPublisherTest" target="Innlevering1.Database.DataPublisher">
-                  <point x="-79.79999999999995" y="-86.0" />
-                  <point x="1846.0822211270872" y="1362.0" />
-                  <point x="1988.6666666666667" y="1362.0" />
-                  <point x="26.666666666666742" y="86.5" />
-                </edge>
-                <edge source="Innlevering1.FileReader" target="Innlevering1.Table">
-                  <point x="-76.25" y="-127.0" />
-                  <point x="0.0" y="262.0" />
-                </edge>
-                <edge source="Innlevering1.Database.DatabaseReaderTest" target="Innlevering1.Database.DatabaseConnector">
-                  <point x="35.22222222222217" y="-72.5" />
-                  <point x="2490.030102846062" y="1412.0" />
-                  <point x="2563.1099639571735" y="1412.0" />
-                  <point x="2563.1099639571735" y="707.0" />
-                  <point x="1420.053019512729" y="707.0" />
-                  <point x="143.40625" y="154.0" />
-                </edge>
-                <edge source="Innlevering1.Database.DatabaseReaderTest" target="Innlevering1.Table">
-                  <point x="105.66666666666663" y="-72.5" />
-                  <point x="2560.4745472905065" y="1432.0" />
-                  <point x="2687.9194444444443" y="1432.0" />
-                  <point x="2687.9194444444443" y="687.0" />
-                  <point x="2340.9422240581835" y="687.0" />
-                  <point x="82.54545454545456" y="262.0" />
-                </edge>
-                <edge source="Innlevering1.Database.DatabaseReaderTest" target="Innlevering1.FileReader">
-                  <point x="-35.222222222222285" y="-72.5" />
-                  <point x="2419.585658401618" y="1272.0" />
-                  <point x="2353.709269512729" y="1272.0" />
-                  <point x="19.0625" y="127.0" />
-                </edge>
-                <edge source="Innlevering1.Application" target="Innlevering1.Database.DatabaseReader">
-                  <point x="67.67857142857144" y="-289.0" />
-                  <point x="1092.0563282699445" y="1322.0" />
-                  <point x="1385.8" y="1322.0" />
-                  <point x="-113.20000000000002" y="167.5" />
-                </edge>
-                <edge source="Innlevering1.Database.TableManager" target="Innlevering1.Database.SQLExceptionHandler">
-                  <point x="-108.0" y="-59.5" />
-                  <point x="54.0" y="757.0" />
-                  <point x="352.8134361793957" y="757.0" />
-                  <point x="-79.66666666666674" y="45.0" />
-                </edge>
-                <edge source="Innlevering1.Application" target="Innlevering1.Database.DatabaseConnector">
-                  <point x="-40.60714285714289" y="-289.0" />
-                  <point x="983.7706139842301" y="1282.0" />
-                  <point x="1183.5" y="1282.0" />
-                  <point x="1183.5" y="837.0" />
-                  <point x="1265.615519512729" y="837.0" />
-                  <point x="-11.03125" y="154.0" />
-                </edge>
-                <edge source="Innlevering1.Database.DataPublisher" target="Innlevering1.Database.SQLExceptionHandler">
-                  <point x="-120.0" y="-86.5" />
-                  <point x="1842.0" y="757.0" />
-                  <point x="512.1467695127292" y="757.0" />
-                  <point x="79.66666666666674" y="45.0" />
-                </edge>
-                <edge source="Innlevering1.Application" target="Innlevering1.FileReader">
-                  <point x="175.96428571428572" y="-289.0" />
-                  <point x="1200.3420425556587" y="1422.0" />
-                  <point x="2239.334269512729" y="1422.0" />
-                  <point x="-95.3125" y="127.0" />
-                </edge>
-                <edge source="Innlevering1.Database.DataPublisherTest" target="Innlevering1.FileReader">
-                  <point x="186.20000000000005" y="-86.0" />
-                  <point x="2112.082221127087" y="1432.0" />
-                  <point x="2277.459269512729" y="1432.0" />
-                  <point x="-57.1875" y="127.0" />
-                </edge>
-                <edge source="Innlevering1.Database.DatabaseReaderTest" target="Innlevering1.Database.DatabaseReader">
-                  <point x="-140.8888888888889" y="-72.5" />
-                  <point x="2313.9189917349513" y="1302.0" />
-                  <point x="1725.4" y="1302.0" />
-                  <point x="226.39999999999998" y="167.5" />
-                </edge>
-                <edge source="Innlevering1.Database.DatabaseConnector" target="Innlevering1.Database.DatabaseInterface">
-                  <point x="0.0" y="-154.0" />
-                  <point x="0.0" y="31.5" />
-                </edge>
-                <edge source="Innlevering1.FileReaderTest" target="Innlevering1.Table">
-                  <point x="127.12499999999989" y="-58.5" />
-                  <point x="2935.423414308905" y="1442.0" />
-                  <point x="2898.548414308905" y="1442.0" />
-                  <point x="2898.548414308905" y="657.0" />
-                  <point x="2464.7604058763654" y="657.0" />
-                  <point x="206.36363636363632" y="262.0" />
-                </edge>
-                <edge source="Innlevering1.Database.DatabaseReader" target="Innlevering1.Database.DatabaseConnector">
-                  <point x="-141.5" y="-167.5" />
-                  <point x="1357.5" y="837.0" />
-                  <point x="1287.678019512729" y="837.0" />
-                  <point x="11.03125" y="154.0" />
-                </edge>
-                <edge source="Innlevering1.Database.TableConnector" target="Innlevering1.Database.DatabaseConnector">
-                  <point x="2.8421709430404007E-14" y="-59.5" />
-                  <point x="591.0" y="787.0" />
-                  <point x="1155.303019512729" y="787.0" />
-                  <point x="-121.34375" y="154.0" />
-                </edge>
-                <edge source="Innlevering1.Database.TableConnector" target="Innlevering1.Database.SQLExceptionHandler">
-                  <point x="-164.66666666666663" y="-59.5" />
-                  <point x="426.3333333333335" y="757.0" />
-                  <point x="432.48010284606244" y="757.0" />
-                  <point x="0.0" y="45.0" />
-                </edge>
-                <edge source="Innlevering1.Application" target="Innlevering1.Database.DataPublisher">
-                  <point x="121.82142857142856" y="-289.0" />
-                  <point x="1146.1991854128014" y="1342.0" />
-                  <point x="1882.0" y="1342.0" />
-                  <point x="-80.0" y="86.5" />
-                </edge>
-              </edges>
-              <settings layout="Hierarchic Group" zoom="0.5808249721293199" x="248.20537428023033" y="563.2053742802303" />
-              <SelectedNodes>
-                <node>Innlevering1.FileReader</node>
-              </SelectedNodes>
-              <Categories>
-                <Category>Fields</Category>
-                <Category>Constructors</Category>
-                <Category>Methods</Category>
-                <Category>Inner Classes</Category>
-              </Categories>
-              <SCOPE>All</SCOPE>
-              <VISIBILITY>private</VISIBILITY>
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="19" column="21" lean-forward="false" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FileReader.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Innlevering1/FileReader.java">
+      <file leaf-file-name="Application.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Innlevering1/Application.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="265">
-              <caret line="21" column="44" lean-forward="true" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
+            <state relative-caret-position="121">
+              <caret line="98" column="63" lean-forward="false" selection-start-line="98" selection-start-column="58" selection-end-line="98" selection-end-column="63" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DatabaseConnector.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Innlevering1/Database/DatabaseConnector.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="588">
+              <caret line="38" column="6" lean-forward="true" selection-start-line="38" selection-start-column="6" selection-end-line="38" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DataPublisher.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Innlevering1/Database/DataPublisher.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="398">
+              <caret line="59" column="13" lean-forward="true" selection-start-line="59" selection-start-column="13" selection-end-line="59" selection-end-column="13" />
+              <folding>
+                <marker date="1507660042312" expanded="true" signature="732:753" ph="DROP TABLE I... " />
+                <marker date="1507660042312" expanded="true" signature="820:871" ph="CREATE TABLE... missingValue" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DatabaseReader.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Innlevering1/Database/DatabaseReader.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="420">
+              <caret line="116" column="46" lean-forward="false" selection-start-line="116" selection-start-column="46" selection-end-line="116" selection-end-column="46" />
+              <folding>
+                <element signature="e#181#182#0" expanded="true" />
+                <element signature="e#227#228#0" expanded="true" />
+                <marker date="1507648978230" expanded="true" signature="973:987" ph="SELECT * FRO... missingValue" />
+                <marker date="1507648978230" expanded="true" signature="1626:1719" ph="SELECT * FRO... missingValue" />
+                <marker date="1507648978230" expanded="true" signature="2418:2456" ph="SELECT * FRO... missingValue" />
+                <marker date="1507648978230" expanded="true" signature="3346:3375" ph="Select count... " />
+                <marker date="1507648978230" expanded="true" signature="3958:3972" ph="SELECT * FRO... missingValue" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Table.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Innlevering1/Table.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="147">
+              <caret line="7" column="43" lean-forward="false" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="43" />
+              <folding>
+                <element signature="method#Table#1;class#Table#0" expanded="false" />
+                <element signature="method#setLinesColumnsFromFile#0;class#Table#0" expanded="false" />
+                <element signature="method#setPrimaryKey#0;class#Table#0" expanded="false" />
+                <element signature="method#setTableName#0;class#Table#0" expanded="false" />
+                <element signature="method#checkForAutoIncrementInTable#0;class#Table#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -346,7 +180,6 @@
         <option value="$PROJECT_DIR$/TestDatabaseProperties.properties" />
         <option value="$PROJECT_DIR$/docs/files/lecturerAndSubject.csv" />
         <option value="$PROJECT_DIR$/docs/files/subject.csv" />
-        <option value="$PROJECT_DIR$/src/main/java/Innlevering1/Database/DatabaseReader.java" />
         <option value="$PROJECT_DIR$/docs/README.md" />
         <option value="$PROJECT_DIR$/src/main/java/Innlevering1/Database/DatabaseInterface.java" />
         <option value="$PROJECT_DIR$/src/main/java/Innlevering1/Database/TableManager.java" />
@@ -359,15 +192,16 @@
         <option value="$PROJECT_DIR$/src/test/java/Innlevering1/CSVFileReaderTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/Innlevering1/Database/MyTestClass.java" />
         <option value="$PROJECT_DIR$/src/test/java/Innlevering1/Database/DatabaseConnectorTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Innlevering1/Database/DataPublisher.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Innlevering1/Database/NewDataPublisher.java" />
         <option value="$PROJECT_DIR$/src/main/java/Innlevering1/CSVFileReader.java" />
         <option value="$PROJECT_DIR$/src/main/java/Innlevering1/Table.java" />
         <option value="$PROJECT_DIR$/src/main/java/Innlevering1/Application.java" />
         <option value="$PROJECT_DIR$/src/test/java/Innlevering1/Database/DatabaseReaderTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/Innlevering1/Database/DataPublisherTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/Innlevering1/FileReaderTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Innlevering1/Database/NewDataPublisher.java" />
         <option value="$PROJECT_DIR$/src/main/java/Innlevering1/FileReader.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Innlevering1/Database/DataPublisher.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Innlevering1/Database/DatabaseReader.java" />
       </list>
     </option>
   </component>
@@ -401,9 +235,8 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="width" value="976" />
-    <option name="height" value="1038" />
+    <option name="width" value="775" />
+    <option name="height" value="840" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -421,9 +254,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -466,6 +297,15 @@
               <item name="innlevering1" type="b2602c69:ProjectViewProjectNode" />
               <item name="Innlevering1" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="Innlevering1" type="462c0819:PsiDirectoryNode" />
+              <item name="Database" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="innlevering1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Innlevering1" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -487,12 +327,14 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="AndroidView" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="settings.github" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../innlevering2" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="ignore_missing_gitignore" value="true" />
@@ -1143,7 +985,11 @@
       <workItem from="1507624573691" duration="8163000" />
       <workItem from="1507633373181" duration="951000" />
       <workItem from="1507634346903" duration="441000" />
-      <workItem from="1507643556974" duration="5454000" />
+      <workItem from="1507643556974" duration="5502000" />
+      <workItem from="1507658264359" duration="4592000" />
+      <workItem from="1507664004131" duration="23000" />
+      <workItem from="1507822837497" duration="1223000" />
+      <workItem from="1508144324887" duration="5246000" />
     </task>
     <task id="LOCAL-00001" summary="dependensy added">
       <created>1504205490532</created>
@@ -1250,7 +1096,14 @@
       <option name="project" value="LOCAL" />
       <updated>1507648336631</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="skiftet navn på metode i FileReader">
+      <created>1507649041408</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1507649041408</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1286,7 +1139,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="265613000" />
+    <option name="totallyTimeSpent" value="276745000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1310,13 +1163,12 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36404493" sideWeight="0.50322235" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33942" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3269663" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3438202" sideWeight="0.49677765" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21348314" sideWeight="0.49677765" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36516854" sideWeight="0.49785176" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26584318" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22556391" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18904404" sideWeight="0.49455675" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32915717" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973147" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1332,6 +1184,7 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17883995" sideWeight="0.5054432" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3280899" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3280899" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1419,7 +1272,8 @@
     <MESSAGE value="Opprettet flere test-klasser" />
     <MESSAGE value="Ferdig opprettet en ny insert data metode" />
     <MESSAGE value="Gjort refactorering på read file og nå fungerende insert data med alle tabeller og prepered statement" />
-    <option name="LAST_COMMIT_MESSAGE" value="Gjort refactorering på read file og nå fungerende insert data med alle tabeller og prepered statement" />
+    <MESSAGE value="skiftet navn på metode i FileReader" />
+    <option name="LAST_COMMIT_MESSAGE" value="skiftet navn på metode i FileReader" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1432,13 +1286,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/docs/files/availability.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="15" lean-forward="true" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/docs/files/program.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
@@ -1501,13 +1348,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Innlevering1/Database/DatabaseReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="56" lean-forward="false" selection-start-line="7" selection-start-column="56" selection-end-line="7" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/docs/files/testFiles/roomTest.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -1536,26 +1376,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Innlevering1/Database/DatabaseConnector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="790">
-          <caret line="45" column="47" lean-forward="false" selection-start-line="45" selection-start-column="47" selection-end-line="45" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_111/src.zip!/java/lang/StringBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="97">
           <caret line="143" column="18" lean-forward="false" selection-start-line="143" selection-start-column="18" selection-end-line="143" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Innlevering1/Database/SQLExceptionHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="15" column="77" lean-forward="false" selection-start-line="15" selection-start-column="77" selection-end-line="15" selection-end-column="77" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1598,7 +1422,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="8" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1641,15 +1464,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="10" column="25" lean-forward="false" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Innlevering1/Database/NewDataPublisher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="26" column="19" lean-forward="true" selection-start-line="26" selection-start-column="19" selection-end-line="26" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1734,14 +1548,6 @@
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Innlevering1/Table.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="19" lean-forward="false" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1749,7 +1555,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1757,7 +1562,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="184">
           <caret line="41" column="26" lean-forward="false" selection-start-line="41" selection-start-column="26" selection-end-line="41" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1769,22 +1573,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Innlevering1/Database/DataPublisher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="73" column="0" lean-forward="true" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
-          <folding>
-            <marker date="1507645372468" expanded="true" signature="722:743" ph="DROP TABLE I... " />
-            <marker date="1507645372468" expanded="true" signature="810:861" ph="CREATE TABLE... missingValue" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/Innlevering1/Database/DatabaseConnectorTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="42">
           <caret line="6" column="33" lean-forward="true" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1792,7 +1584,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="253">
           <caret line="27" column="26" lean-forward="false" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1800,7 +1591,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
           <caret line="8" column="13" lean-forward="true" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1819,7 +1609,7 @@
           <nodes />
           <notes />
           <edges />
-          <settings layout="Hierarchic Group" zoom="0.7000000000000001" x="507.5" y="220.5" />
+          <settings layout="Hierarchic Group" zoom="0.7000000000000001" x="508.0" y="221.0" />
           <SelectedNodes />
           <Categories />
           <SCOPE>All</SCOPE>
@@ -1858,22 +1648,12 @@
           <SelectedNodes />
           <Categories>
             <Category>Fields</Category>
+            <Category>Inner Classes</Category>
             <Category>Constructors</Category>
             <Category>Methods</Category>
-            <Category>Inner Classes</Category>
           </Categories>
           <SCOPE>All</SCOPE>
           <VISIBILITY>private</VISIBILITY>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Innlevering1/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2091,15 +1871,15 @@
               <point x="-80.0" y="86.5" />
             </edge>
           </edges>
-          <settings layout="Hierarchic Group" zoom="0.5808249721293199" x="248.20537428023033" y="563.2053742802303" />
+          <settings layout="Hierarchic Group" zoom="0.5808249721293199" x="248.0" y="563.0" />
           <SelectedNodes>
             <node>Innlevering1.FileReader</node>
           </SelectedNodes>
           <Categories>
             <Category>Fields</Category>
+            <Category>Inner Classes</Category>
             <Category>Constructors</Category>
             <Category>Methods</Category>
-            <Category>Inner Classes</Category>
           </Categories>
           <SCOPE>All</SCOPE>
           <VISIBILITY>private</VISIBILITY>
@@ -2108,9 +1888,90 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Innlevering1/FileReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="21" column="44" lean-forward="true" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
+        <state relative-caret-position="147">
+          <caret line="11" column="22" lean-forward="true" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="19" column="21" lean-forward="false" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Innlevering1/Database/NewDataPublisher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="47" column="29" lean-forward="false" selection-start-line="47" selection-start-column="29" selection-end-line="47" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Innlevering1/Database/DatabaseConnector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="588">
+          <caret line="38" column="6" lean-forward="true" selection-start-line="38" selection-start-column="6" selection-end-line="38" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Innlevering1/Database/SQLExceptionHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="5" column="25" lean-forward="false" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Innlevering1/Database/DataPublisher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="59" column="13" lean-forward="true" selection-start-line="59" selection-start-column="13" selection-end-line="59" selection-end-column="13" />
+          <folding>
+            <marker date="1507660042312" expanded="true" signature="732:753" ph="DROP TABLE I... " />
+            <marker date="1507660042312" expanded="true" signature="820:871" ph="CREATE TABLE... missingValue" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Innlevering1/Table.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="7" column="43" lean-forward="false" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="43" />
+          <folding>
+            <element signature="method#Table#1;class#Table#0" expanded="false" />
+            <element signature="method#setLinesColumnsFromFile#0;class#Table#0" expanded="false" />
+            <element signature="method#setPrimaryKey#0;class#Table#0" expanded="false" />
+            <element signature="method#setTableName#0;class#Table#0" expanded="false" />
+            <element signature="method#checkForAutoIncrementInTable#0;class#Table#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Innlevering1/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="98" column="63" lean-forward="false" selection-start-line="98" selection-start-column="58" selection-end-line="98" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Innlevering1/Database/DatabaseReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="116" column="46" lean-forward="false" selection-start-line="116" selection-start-column="46" selection-end-line="116" selection-end-column="46" />
+          <folding>
+            <element signature="e#181#182#0" expanded="true" />
+            <element signature="e#227#228#0" expanded="true" />
+            <marker date="1507648978230" expanded="true" signature="973:987" ph="SELECT * FRO... missingValue" />
+            <marker date="1507648978230" expanded="true" signature="1626:1719" ph="SELECT * FRO... missingValue" />
+            <marker date="1507648978230" expanded="true" signature="2418:2456" ph="SELECT * FRO... missingValue" />
+            <marker date="1507648978230" expanded="true" signature="3346:3375" ph="Select count... " />
+            <marker date="1507648978230" expanded="true" signature="3958:3972" ph="SELECT * FRO... missingValue" />
+          </folding>
         </state>
       </provider>
     </entry>

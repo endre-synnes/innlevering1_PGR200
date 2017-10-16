@@ -18,7 +18,7 @@ public class DataPublisher {
      * @param tableFromFile
      * @return String explaining if i succeeded.
      */
-    public String createTable(Table tableFromFile) {
+    public String createTableInDatabase(Table tableFromFile) {
         try (Connection connection = dbConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement("")){
             statement.execute("DROP TABLE IF EXISTS " + tableFromFile.getTableName());
@@ -40,21 +40,20 @@ public class DataPublisher {
 
     /**
      * Inserting data into a table if it exist
-     * @param convertedFile
+     * @param tableFromFile
      * @return String explaining if i succeeded.
      */
-    //TODO få denne til å funke
-    public String insertData(Table convertedFile) {
+    public String insertDataToDatabase(Table tableFromFile) {
         try (Connection connection = dbConnector.getConnection();
-             PreparedStatement statement = connection.prepareStatement(stringBuilding(convertedFile))){
+             PreparedStatement statement = connection
+                     .prepareStatement(stringBuildingForInsertingDataToDatabase(tableFromFile))) {
 
             int index = 1;
-            for (int i = 0; i < convertedFile.getLinesAndColumnsFromFile().length; i++) {
-                for (int j = 0; j < convertedFile.getLinesAndColumnsFromFile()[i].length; j++) {
-                    statement.setString(index++, convertedFile.getLinesAndColumnsFromFile()[i][j]);
+            for (int i = 0; i < tableFromFile.getLinesAndColumnsFromFile().length; i++) {
+                for (int j = 0; j < tableFromFile.getLinesAndColumnsFromFile()[i].length; j++) {
+                    statement.setString(index++, tableFromFile.getLinesAndColumnsFromFile()[i][j]);
                 }
             }
-
             int linesInserted = statement.executeUpdate();
             return "Successfully inserted " + linesInserted + " rows to table";
         } catch (SQLException e){
@@ -62,25 +61,24 @@ public class DataPublisher {
         }
     }
 
-    //TODO: Opprette string til insertDataToTable metoden
-    private String stringBuilding(Table converter){
+    private String stringBuildingForInsertingDataToDatabase(Table table){
         StringBuilder sqlString = new StringBuilder();
         sqlString.append("INSERT INTO ");
-        sqlString.append(converter.getTableName());
+        sqlString.append(table.getTableName());
         sqlString.append("(");
         int startColumn = 0;
-        if (converter.checkForAutoIncrementInTable()) startColumn = 1;
-        int columnCount = converter.getColumnNames().length;
+        if (table.checkForAutoIncrementInTable()) startColumn = 1;
+        int columnCount = table.getColumnNames().length;
 
         for (int i = startColumn; i < columnCount; i++) {
-            sqlString.append(converter.getColumnNames()[i]);
+            sqlString.append(table.getColumnNames()[i]);
             if (i+1 < columnCount){
                 sqlString.append(",");
             }
         }
         sqlString.append(")\nVALUES\n(");
-        for (int i = 0; i < converter.getLinesAndColumnsFromFile().length; i++) {
-            for (int j = 0; j < converter.getLinesAndColumnsFromFile()[i].length - 1; j++) {
+        for (int i = 0; i < table.getLinesAndColumnsFromFile().length; i++) {
+            for (int j = 0; j < table.getLinesAndColumnsFromFile()[i].length - 1; j++) {
                 sqlString.append("?" + ", ");
             }
             sqlString.append("?" + "),\n(");

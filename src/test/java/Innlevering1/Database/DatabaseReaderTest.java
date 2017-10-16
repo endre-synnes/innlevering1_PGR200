@@ -27,8 +27,8 @@ public class DatabaseReaderTest {
         Table table = new Table();
         table = fileReader.createTableObject("testFiles/roomTest", table);
         DataPublisher publisher = new DataPublisher(dbConnector);
-        publisher.createTable(table);
-        publisher.insertData(table);
+        publisher.createTableInDatabase(table);
+        publisher.insertDataToDatabase(table);
 
         String dbReader = new DatabaseReader(dbConnector).countRowsInTable("testFiles/roomTest");
     }

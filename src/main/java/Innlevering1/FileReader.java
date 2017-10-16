@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileReader {
-    private String[] columnNames, dataTypes;
-    private String primaryKey, tableName;
-    private Table table;
 
     public FileReader() {}
 
