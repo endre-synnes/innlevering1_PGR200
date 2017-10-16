@@ -1,9 +1,13 @@
 package Innlevering1.Database;
 
 
+import com.mysql.jdbc.exceptions.MySQLDataException;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
+import javax.sql.DataSource;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.*;
 import java.util.Properties;
 
@@ -18,10 +22,9 @@ public class DatabaseConnector implements DatabaseInterface{
     /**
      * Reads the property file
      */
-    public DatabaseConnector(String properties) {
-        try {
+    public DatabaseConnector(String properties) throws SQLException, IOException{
+        try (FileInputStream fileInputStream = new FileInputStream(properties)){
             Properties prop = new Properties();
-            FileInputStream fileInputStream = new FileInputStream(properties);
             prop.load(fileInputStream);
             hostName = prop.getProperty("hostName");
             dbName = prop.getProperty("dbName");
@@ -29,8 +32,6 @@ public class DatabaseConnector implements DatabaseInterface{
             password = prop.getProperty("password");
             port = Integer.parseInt(prop.getProperty("port"));
             dropDatabaseIfExist(getConnection());
-        }catch (Exception e){
-            System.out.println("Could not createTableObject property file correctly!");
         }
     }
 
@@ -40,7 +41,7 @@ public class DatabaseConnector implements DatabaseInterface{
      * @return connections to server
      */
     @Override
-    public Connection getConnection(){
+    public Connection getConnection() throws SQLException{
         try {
             dataSource = new MysqlDataSource();
             dataSource.setServerName(hostName);
@@ -49,8 +50,8 @@ public class DatabaseConnector implements DatabaseInterface{
             dataSource.setPort(port);
             createAndSetDatabase(dataSource.getConnection());
             return dataSource.getConnection();
-        }catch (SQLException dbException){
-            System.out.println("Could not connect to server, please check the DB Name file or your username/password!");
+        }catch (SQLException e){
+            System.out.println(SQLExceptionHandler.sqlErrorCode(e.getErrorCode()));
             System.exit(0);
             return null;
         }
@@ -70,12 +71,9 @@ public class DatabaseConnector implements DatabaseInterface{
         }
     }
 
-    private void dropDatabaseIfExist (Connection connection){
-        try {
-            Statement statement = connection.createStatement();
+    private void dropDatabaseIfExist (Connection connection) throws SQLException{
+        try (Statement statement = connection.createStatement()){
             statement.executeUpdate("DROP DATABASE IF EXISTS " + dbName);
-        }catch (SQLException e){
-            System.out.println("Failed to drop Database");
         }
     }
 

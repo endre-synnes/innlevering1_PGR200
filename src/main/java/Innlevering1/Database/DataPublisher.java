@@ -18,7 +18,7 @@ public class DataPublisher {
      * @param tableFromFile
      * @return String explaining if i succeeded.
      */
-    public String createTableInDatabase(Table tableFromFile) {
+    public String createTableInDatabase(Table tableFromFile) throws SQLException{
         try (Connection connection = dbConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement("")){
             statement.execute("DROP TABLE IF EXISTS " + tableFromFile.getTableName());
@@ -31,8 +31,6 @@ public class DataPublisher {
 
             statement.executeUpdate(sqlSyntax);
             return "Successfully created table!";
-        } catch (SQLException e) {
-            return SQLExceptionHandler.sqlErrorCode(e.getErrorCode());
         }
 
 
@@ -43,10 +41,10 @@ public class DataPublisher {
      * @param tableFromFile
      * @return String explaining if i succeeded.
      */
-    public String insertDataToDatabase(Table tableFromFile) {
+    public String insertDataToDatabase(Table tableFromFile) throws SQLException, NullPointerException{
         try (Connection connection = dbConnector.getConnection();
              PreparedStatement statement = connection
-                     .prepareStatement(stringBuildingForInsertingDataToDatabase(tableFromFile))) {
+                     .prepareStatement(buildingStringForInsertingDataToDatabase(tableFromFile))) {
 
             int index = 1;
             for (int i = 0; i < tableFromFile.getLinesAndColumnsFromFile().length; i++) {
@@ -56,12 +54,10 @@ public class DataPublisher {
             }
             int linesInserted = statement.executeUpdate();
             return "Successfully inserted " + linesInserted + " rows to table";
-        } catch (SQLException e){
-            return SQLExceptionHandler.sqlErrorCode(e.getErrorCode());
         }
     }
 
-    private String stringBuildingForInsertingDataToDatabase(Table table){
+    private String buildingStringForInsertingDataToDatabase(Table table) throws NullPointerException{
         StringBuilder sqlString = new StringBuilder();
         sqlString.append("INSERT INTO ");
         sqlString.append(table.getTableName());

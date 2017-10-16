@@ -10,29 +10,23 @@ public class DatabaseReader{
     }
 
 
-    public String getAllTables(){
+    public String getAllTables() throws SQLException{
         try (Connection connection = dbConnector.getConnection();
-             PreparedStatement statement = connection.prepareStatement("")){
+             PreparedStatement statement = connection.prepareStatement("")) {
             ResultSet result = statement.executeQuery("SHOW TABLES");
             return buildString(result);
-        }catch (SQLException e){
-                 return "no tables in Database";
         }
     }
 
     /**
-     *
      * @param tableName
      * @return A formatted string of all table names.
      */
-    public String getAllFromOneTable(String tableName) {
+    public String getAllFromOneTable(String tableName) throws SQLException{
         try (Connection connection = dbConnector.getConnection();
-             PreparedStatement statement = connection.prepareStatement("")){
+             PreparedStatement statement = connection.prepareStatement("")) {
             ResultSet result = statement.executeQuery("SELECT * FROM " + tableName);
             return buildString(result);
-        }
-        catch (SQLException e){
-            return "No table with that name!";
         }
     }
 
@@ -43,15 +37,13 @@ public class DatabaseReader{
      * @param parameter
      * @return A formatted string containing Lines in a table that has one parameter.
      */
-    public String getLinesThatHasOneParameter(String tableName, String columnName, String parameter){
+    public String getLinesThatHasOneParameter(String tableName, String columnName,
+                                              String parameter) throws SQLException{
         try (Connection connection = dbConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement("")){
             ResultSet result = statement.executeQuery("SELECT * FROM " + tableName
             + " WHERE " + columnName + " LIKE '" + parameter + "';");
             return buildString(result);
-        }
-        catch (SQLException e){
-            return ("No table with that name or column name");
         }
     }
 
@@ -63,7 +55,9 @@ public class DatabaseReader{
      * @param value
      * @return Return a formatted string containing lines with an int value greater og less then value you put in.
      */
-    public String getLinesWithValuesGreaterOrLessThen(String tableName, String columnName, String greaterOrLess, String value){
+    public String getLinesWithValuesGreaterOrLessThen(String tableName,
+                                                      String columnName, String greaterOrLess,
+                                                      String value) throws SQLException{
         try(Connection connection = dbConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement("")){
             String sqlSyntax = "SELECT * FROM " + tableName + " WHERE " + columnName;
@@ -78,10 +72,6 @@ public class DatabaseReader{
             else return "Enter valid data and parameter (greater or less)";
             ResultSet result = statement.executeQuery(sqlSyntax);
             return buildString(result);
-
-
-        }catch (SQLException e){
-            return "No table with that name or column name!";
         }
     }
 
@@ -90,14 +80,11 @@ public class DatabaseReader{
      * @param tableName
      * @return Returns a string with the number of rows in a table.
      */
-    public String countRowsInTable(String tableName) {
+    public String countRowsInTable(String tableName) throws SQLException{
         try (Connection connection = dbConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement("")) {
             String sqlSyntax = "Select count(*) as rows from " + tableName;
             return buildString(statement.executeQuery(sqlSyntax));
-
-        }catch (SQLException e){
-            return "Could not count table, wrong table name";
         }
     }
 
@@ -106,7 +93,7 @@ public class DatabaseReader{
      * @param tableName
      * @return Returns a formatted string containing metadata from one table.
      */
-    public StringBuilder getMetaDataFromTable(String tableName){
+    public StringBuilder getMetaDataFromTable(String tableName) throws SQLException{
         try (Connection connection = dbConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement("")){
             ResultSet result = statement.executeQuery("SELECT * FROM " + tableName);
@@ -132,15 +119,11 @@ public class DatabaseReader{
      * @param tableName
      * @return True of False if table exist in the database or not.
      */
-    public boolean tableExist(String tableName){
+    public boolean tableExist(String tableName) throws SQLException{
         try (Connection connection = dbConnector.getConnection()) {
             DatabaseMetaData dbMetaData = connection.getMetaData();
             ResultSet tables = dbMetaData.getTables(null, null, tableName, null);
-
             return tables.next();
-
-        } catch (SQLException e){
-            return false;
         }
     }
 
@@ -149,7 +132,7 @@ public class DatabaseReader{
      * @param result
      * @return String
      */
-    private String buildString(ResultSet result){
+    private String buildString(ResultSet result) throws SQLException{
         try {
             StringBuilder stringResult = new StringBuilder();
             stringResult.append(getColumnNamesFromTable(result));
@@ -173,7 +156,7 @@ public class DatabaseReader{
      * @param result
      * @return Returns column names in a table.
      */
-    private String getColumnNamesFromTable(ResultSet result){
+    private String getColumnNamesFromTable(ResultSet result) throws SQLException{
         try {
             ResultSetMetaData columnNames = result.getMetaData();
             int columnCount = columnNames.getColumnCount();
