@@ -18,9 +18,9 @@ public class FileReaderTest {
     @Test
     public void ableToReadPrimaryKeyCorrectly() throws Exception {
         FileReader reader = new FileReader();
-        Table table = new Table();
-        table = reader.createTableObject("subject", table);
-        String primaryKey = table.getPrimaryKey();
+        TableObjectFromFile tableObjectFromFile = new TableObjectFromFile();
+        tableObjectFromFile = reader.createTableObject("subject", tableObjectFromFile);
+        String primaryKey = tableObjectFromFile.getPrimaryKey();
         assertEquals("id", primaryKey);
     }
 }

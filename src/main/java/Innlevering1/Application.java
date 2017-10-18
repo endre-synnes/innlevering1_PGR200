@@ -68,9 +68,12 @@ public class Application {
         }catch (SQLException se){
             System.out.println(SQLExceptionHandler.sqlErrorCode(se.getErrorCode()));
         }catch (NullPointerException empty){
-            System.out.println("Object not initialised.");
+            System.out.print(empty.getMessage());
+            System.out.println(" Object not initialised.");
         }catch (FileNotFoundException noFile){
             System.out.println("File not Found.");
+        }catch (Exception e){
+            System.out.println("Exception i Application");
         }
 
     }
@@ -88,7 +91,7 @@ public class Application {
         builder.append(String.format("%-10s %-50s\n", "6", "Count rows in a table."));
         builder.append(String.format("%-10s %-50s\n", "7", "Get metadata from table."));
         builder.append(String.format("%-10s %-50s\n", "8", "Connect all tables (Only after all tables are in the database!)"));
-        builder.append(String.format("%-10s %-50s\n", "9", "Drop Table (Needed to rewrite tables if you have connected tables)"));
+        builder.append(String.format("%-10s %-50s\n", "9", "Drop TableObjectFromFile (Needed to rewrite tables if you have connected tables)"));
         builder.append(String.format("%-10s %-50s\n", "10", "Read all example files"));
         builder.append(String.format("%-10s %-50s\n", "exit", "Exit program"));
         for (int i = 0; i < 60; i++) { builder.append("#"); }
@@ -100,12 +103,12 @@ public class Application {
 
     private void readFileAndPublish() throws SQLException, FileNotFoundException, NullPointerException{
         System.out.println("\nEnter name of file:");
-        Table table = new Table();
+        TableObjectFromFile tableObjectFromFile = new TableObjectFromFile();
         FileReader FileReader = new FileReader();
-        table = FileReader.createTableObject(scanner.nextLine(), table);
+        tableObjectFromFile = FileReader.createTableObject(scanner.nextLine(), tableObjectFromFile);
 
-        System.out.println(publisher.createTableInDatabase(table));
-        System.out.println(publisher.insertDataToDatabase(table));
+        System.out.println(publisher.createTableInDatabase(tableObjectFromFile));
+        System.out.println(publisher.insertDataToDatabase(tableObjectFromFile));
 
     }
 
@@ -114,14 +117,18 @@ public class Application {
         System.out.println(DBReader.getAllTables());
     }
 
-    private void getAllFromOneTable() throws SQLException{
+    private void getAllFromOneTable() throws SQLException, Exception{
         System.out.println("\nEnter name of the table you want to print: ");
-        System.out.println(DBReader.getAllFromOneTable(scanner.nextLine()) + "\n");
+        TableObjectFromDB dbTable = new TableObjectFromDB();
+        dbTable = DBReader.getAllFromOneTable(scanner.nextLine(), dbTable);
+        System.out.println(dbTable.readContent());
     }
 
     private void getLinesWithParameter() throws SQLException{
         System.out.println("\nEnter name of table, column name and your parameter (press enter for each element):");
-        System.out.println(DBReader.getLinesThatHasOneParameter(scanner.nextLine(), scanner.nextLine(), scanner.nextLine()) + "\n");
+        TableObjectFromDB dbTable = new TableObjectFromDB();
+        dbTable = DBReader.getLinesThatHasOneParameter(scanner.nextLine(), scanner.nextLine(), scanner.nextLine(), dbTable);
+        System.out.println(dbTable.readContent());
     }
 
     private void getLinesWithValuesGreaterOrLessThen() throws SQLException{
@@ -137,7 +144,9 @@ public class Application {
 
     private void getMetaDataFromTable() throws SQLException{
         System.out.println("\nEnter name of the table you want to get metadata from: ");
-        System.out.println(DBReader.getMetaDataFromTable(scanner.nextLine()) + "\n");
+        TableObjectFromDB dbTable = new TableObjectFromDB();
+        dbTable = DBReader.getMetaDataFromTable(scanner.nextLine(), dbTable);
+        System.out.println(dbTable.readMetadata());
     }
 
     /**
@@ -167,10 +176,10 @@ public class Application {
                 "program", "room", "semester", "subject", "subjectAndProgram",
                 "SubjectAndRoom"};
         for (String fileName: fileNames) {
-            Table table = new Table();
-            table = fileReader.createTableObject(fileName, table);
-            publisher.createTableInDatabase(table);
-            publisher.insertDataToDatabase(table);
+            TableObjectFromFile tableObjectFromFile = new TableObjectFromFile();
+            tableObjectFromFile = fileReader.createTableObject(fileName, tableObjectFromFile);
+            publisher.createTableInDatabase(tableObjectFromFile);
+            publisher.insertDataToDatabase(tableObjectFromFile);
         }
         System.out.println("All tables createTableObject.\n");
     }

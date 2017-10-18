@@ -1,7 +1,7 @@
 package Innlevering1.Database;
 
 import Innlevering1.FileReader;
-import Innlevering1.Table;
+import Innlevering1.TableObjectFromFile;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,10 +25,10 @@ public class DataPublisherTest {
     @Test
     public void ableToCreateTable() throws Exception {
         FileReader reader = new FileReader();
-        Table table = new Table();
-        table = reader.createTableObject("testFiles/subjectTest", table);
+        TableObjectFromFile tableObjectFromFile = new TableObjectFromFile();
+        tableObjectFromFile = reader.createTableObject("testFiles/subjectTest", tableObjectFromFile);
         DataPublisher publisher = new DataPublisher(dbConnector);
-        assertEquals("Successfully created table!", publisher.createTableInDatabase(table));
+        assertEquals("Successfully created tableObjectFromFile!", publisher.createTableInDatabase(tableObjectFromFile));
     }
 
     @Test
@@ -38,14 +38,14 @@ public class DataPublisherTest {
 
         //Reading file
         FileReader fileReader = new FileReader();
-        Table table = new Table();
-        table = fileReader.createTableObject(tableName, table);
+        TableObjectFromFile tableObjectFromFile = new TableObjectFromFile();
+        tableObjectFromFile = fileReader.createTableObject(tableName, tableObjectFromFile);
 
-        //Publishing table
+        //Publishing tableObjectFromFile
         DataPublisher publisher = new DataPublisher(dbConnector);
-        publisher.createTableInDatabase(table);
+        publisher.createTableInDatabase(tableObjectFromFile);
 
-        //Checking if table exist
+        //Checking if tableObjectFromFile exist
         DatabaseReader databaseReader = new DatabaseReader(dbConnector);
         assertTrue(databaseReader.tableExist(tableName));
     }

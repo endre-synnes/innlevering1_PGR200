@@ -7,7 +7,7 @@ public class SQLExceptionHandler extends Throwable {
         switch (errorCode){
             case 1217 : return unableToDrop();
             case 1022 : return "This constraint already exist!";
-            case 1146 : return "Table or column name does not exist!";
+            case 1146 : return "TableObjectFromFile or column name does not exist!";
             case 1215 : return "Check your table or column name!";
             case 1072 : return "Check if your column name exists!";
             case 1452 : return "At least one row in the child table that references a non-existent row in the parent table";

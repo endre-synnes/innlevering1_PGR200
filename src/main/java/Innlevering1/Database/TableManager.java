@@ -20,7 +20,7 @@ public class TableManager {
         try (Connection connection = connector.getConnection()){
             Statement statement = connection.createStatement();
             statement.executeUpdate("DROP TABLE " + tableName);
-            return "Table " + tableName + " is dropped!";
+            return "TableObjectFromFile " + tableName + " is dropped!";
         }
     }
 

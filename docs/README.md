@@ -21,12 +21,12 @@
 
 optional:
 
-    If you want to add some row to a table, just add the rows you want into the csv-files already created with the
+    If you want to add some row to a tableObjectFromFile, just add the rows you want into the csv-files already created with the
     correct formatting. Or you can create some new csv files if you want.
     Just remember to use the right formatting as described here:
 
 
-Create new table in database:
+Create new tableObjectFromFile in database:
 
     a.  Create a new CSV-file in the same directory as the other csv files
 
@@ -36,7 +36,7 @@ Create new table in database:
 
             Metadata in the first four lines:
 
-                line 1: table name (should be the same as the name of your file)
+                line 1: tableObjectFromFile name (should be the same as the name of your file)
 
                 line 2: column names
 
@@ -51,7 +51,7 @@ Create new table in database:
                 lines 5 to the end: your data with separator for each column;
 
 
-Insert new data into tables:
+Insert new data into tablesInDB:
 
     a. Open one of the csv-files already in the directory.
 

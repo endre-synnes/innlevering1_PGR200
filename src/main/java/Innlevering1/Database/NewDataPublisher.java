@@ -1,7 +1,7 @@
 //package Innlevering1.Database;
 //
 //import Innlevering1.FileReader;
-//import Innlevering1.Table;
+//import Innlevering1.TableObjectFromFile;
 //
 //import java.sql.Connection;
 //import java.sql.PreparedStatement;
@@ -15,7 +15,7 @@
 //        this.dbConnector = dbConnector;
 //    }
 //
-//    public String insertDataToTable(Table convertedFile){
+//    public String insertDataToTable(TableObjectFromFile convertedFile){
 //        try (Connection connection = dbConnector.getConnection();
 //             PreparedStatement statement = connection.prepareStatement(stringBuilding(convertedFile))){
 //
@@ -33,7 +33,7 @@
 //        }
 //    }
 //
-//    private String stringBuilding(Table converter){
+//    private String stringBuilding(TableObjectFromFile converter){
 //        StringBuilder sqlString = new StringBuilder();
 //        sqlString.append("INSERT INTO ");
 //        sqlString.append(converter.getTableName());
@@ -66,7 +66,7 @@
 //
 //        try {
 //            FileReader FileReader = new FileReader();
-//            Table dataConverter = FileReader.read("lecturer");
+//            TableObjectFromFile dataConverter = FileReader.read("lecturer");
 //
 //
 //            DatabaseConnector dbConnector = new DatabaseConnector("DatabaseProperties.properties");
