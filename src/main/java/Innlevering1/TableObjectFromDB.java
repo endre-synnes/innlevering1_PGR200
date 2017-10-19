@@ -59,32 +59,4 @@ public class TableObjectFromDB{
         this.columnTypeName = columnTypeName;
     }
 
-    public String readContent(){
-        StringBuilder string = new StringBuilder();
-        for (String s: columnName) {
-            string.append(s).append(" ");
-        }
-        string.append("\n");
-        for (String[] line: contentOfTable) {
-            for (String s: line) {
-                string.append(s).append(" ");
-            }
-            string.append("\n");
-        }
-        return string.toString();
-    }
-
-    public String readMetadata(){
-        StringBuilder string = new StringBuilder();
-        string.append(String.format("%-15s%-15s%-15s\n", "Name", "Size", "Data type"));
-        for (int i = 0; i < 40; i++) { string.append("-"); }
-        string.append("\n");
-        for (int i = 0; i < columnName.length; i++) {
-            string.append(String.format("%-15s%-15s%-15s\n",
-                    columnName[i], columnTypeName[i],
-                    columnDisplaySize[i]));
-        }
-        return string.toString();
-    }
-
 }

@@ -118,7 +118,7 @@ public class Application {
         System.out.println("\nPrinting all tables in database:");
         TableObjectFromDB dbTable = new TableObjectFromDB();
         dbTable = DBReader.getAllTables(dbTable);
-        System.out.println(dbTable.readContent());
+        System.out.println(StringCreator.getContent(dbTable));
 
     }
 
@@ -126,14 +126,14 @@ public class Application {
         System.out.println("\nEnter name of the table you want to print: ");
         TableObjectFromDB dbTable = new TableObjectFromDB();
         dbTable = DBReader.getAllFromOneTable(scanner.nextLine(), dbTable);
-        System.out.println(dbTable.readContent());
+        System.out.println(StringCreator.getContent(dbTable));
     }
 
     private void getLinesWithParameter() throws SQLException{
         System.out.println("\nEnter name of table, column name and your parameter (press enter for each element):");
         TableObjectFromDB dbTable = new TableObjectFromDB();
         dbTable = DBReader.getLinesThatHasOneParameter(scanner.nextLine(), scanner.nextLine(), scanner.nextLine(), dbTable);
-        System.out.println(dbTable.readContent());
+        System.out.println(StringCreator.getContent(dbTable));
     }
 
     private void getLinesWithValuesGreaterOrLessThen() throws SQLException, IllegalArgumentException{
@@ -142,14 +142,14 @@ public class Application {
         dbTable = DBReader.getLinesWithValuesGreaterOrLessThen(scanner.nextLine(), scanner.nextLine(),
                                                                scanner.nextLine(), scanner.nextLine(),
                                                                dbTable);
-        System.out.println(dbTable.readContent());
+        System.out.println(StringCreator.getContent(dbTable));
     }
 
     private void countRows() throws SQLException{
         System.out.println("\nEnter name of the table you want to count rows: ");
         TableObjectFromDB dbTable = new TableObjectFromDB();
         dbTable = DBReader.countRowsInTable(scanner.nextLine(), dbTable);
-        System.out.println(dbTable.readContent());
+        System.out.println(StringCreator.getContent(dbTable));
     }
 
 
@@ -157,7 +157,7 @@ public class Application {
         System.out.println("\nEnter name of the table you want to get metadata from: ");
         TableObjectFromDB dbTable = new TableObjectFromDB();
         dbTable = DBReader.getMetaDataFromTable(scanner.nextLine(), dbTable);
-        System.out.println(dbTable.readMetadata());
+        System.out.println(StringCreator.getMetaData(dbTable));
     }
 
     /**
@@ -192,7 +192,7 @@ public class Application {
             publisher.createTableInDatabase(tableObjectFromFile);
             publisher.insertDataToDatabase(tableObjectFromFile);
         }
-        System.out.println("All tables createTableObject.\n");
+        System.out.println("All tables are created.\n");
     }
 
 

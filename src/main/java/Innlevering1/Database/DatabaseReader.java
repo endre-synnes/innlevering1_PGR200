@@ -12,7 +12,12 @@ public class DatabaseReader{
         this.dbConnector = dbConnector;
     }
 
-
+    /**
+     *
+     * @param tableObjectFromDB
+     * @return Populated table from Database
+     * @throws SQLException
+     */
     public TableObjectFromDB getAllTables(TableObjectFromDB tableObjectFromDB) throws SQLException{
         try (Connection connection = dbConnector.getConnection();
              PreparedStatement statement = connection.
@@ -25,8 +30,11 @@ public class DatabaseReader{
     }
 
     /**
+     *
      * @param tableName
-     * @return A formatted string of all table names.
+     * @param tableObjectFromDB
+     * @return Populated table from Database
+     * @throws Exception
      */
     public TableObjectFromDB getAllFromOneTable(String tableName, TableObjectFromDB tableObjectFromDB) throws Exception{
         try (Connection connection = dbConnector.getConnection();
@@ -44,7 +52,9 @@ public class DatabaseReader{
      * @param tableName
      * @param columnName
      * @param parameter
-     * @return A formatted string containing Lines in a table that has one parameter.
+     * @param tableObjectFromDB
+     * @return Populated table from Database
+     * @throws SQLException
      */
     public TableObjectFromDB getLinesThatHasOneParameter(String tableName, String columnName,
                                               String parameter, TableObjectFromDB tableObjectFromDB) throws SQLException{
@@ -62,7 +72,9 @@ public class DatabaseReader{
      * @param columnName
      * @param greaterOrLess
      * @param value
-     * @return Return a formatted string containing lines with an int value greater og less then value you put in.
+     * @param tableObjectFromDB
+     * @return Populated table from Database
+     * @throws SQLException
      */
     public TableObjectFromDB getLinesWithValuesGreaterOrLessThen(String tableName,
                                                       String columnName, String greaterOrLess,
@@ -88,7 +100,9 @@ public class DatabaseReader{
     /**
      *
      * @param tableName
-     * @return Returns a string with the number of rows in a table.
+     * @param tableObjectFromDB
+     * @return Populated table from Database
+     * @throws SQLException
      */
     public TableObjectFromDB countRowsInTable(String tableName, TableObjectFromDB tableObjectFromDB) throws SQLException{
         try (Connection connection = dbConnector.getConnection();
@@ -101,7 +115,10 @@ public class DatabaseReader{
     /**
      *
      * @param tableName
-     * @return Returns a formatted string containing metadata from one table.
+     * @param tableObjectFromDB
+     * @return Populated table from Database
+     * @throws SQLException
+     * @throws NullPointerException
      */
     public TableObjectFromDB getMetaDataFromTable(String tableName, TableObjectFromDB tableObjectFromDB)
             throws SQLException, NullPointerException{
@@ -117,42 +134,12 @@ public class DatabaseReader{
 
     /**
      *
-     * @param tableName
-     * @return True of False if table exist in the database or not.
-     */
-    public boolean tableExist(String tableName) throws SQLException{
-        try (Connection connection = dbConnector.getConnection()) {
-            DatabaseMetaData dbMetaData = connection.getMetaData();
-            ResultSet tables = dbMetaData.getTables(null, null, tableName, null);
-            return tables.next();
-        }
-    }
-
-    /**
-     * Building a string in the right formatting.
      * @param result
-     * @return String
+     * @param tableObjectFromDB
+     * @return Populated table from Database
+     * @throws NullPointerException
+     * @throws SQLException
      */
-    private String buildString(ResultSet result) throws SQLException{
-        try {
-            StringBuilder stringResult = new StringBuilder();
-            stringResult.append(getColumnNamesFromTable(result));
-            int columnCount = result.getMetaData().getColumnCount();
-            while (result.next()){
-                stringResult.append("\n");
-                for (int i = 0; i < columnCount; i++) {
-                    stringResult.append(String.format("%-30s", result.getString(i + 1)));
-                }
-            }
-            stringResult.append("\n");
-            if (stringResult.length() == 0) return "No lines";
-            return stringResult.toString();
-        } catch (Exception e){
-            return "Error while creating print!";
-        }
-    }
-
-
     private TableObjectFromDB setContentOfTableFromDB(ResultSet result, TableObjectFromDB tableObjectFromDB)
         throws NullPointerException, SQLException{
         try {
@@ -177,6 +164,14 @@ public class DatabaseReader{
 
     }
 
+    /**
+     *
+     * @param result
+     * @param tableObjectFromDB
+     * @return Populated table from Database
+     * @throws NullPointerException
+     * @throws SQLException
+     */
     private TableObjectFromDB setTableMetadata(ResultSet result, TableObjectFromDB tableObjectFromDB)
             throws NullPointerException, SQLException {
         try {
@@ -203,32 +198,13 @@ public class DatabaseReader{
         }
     }
 
+    /**
+     *
+     * @param columnName
+     * @return Formatted String
+     */
     private String formatColumnName(String columnName){
         columnName = columnName.toLowerCase().replaceAll("_", " ");
         return columnName.substring(0, 1).toUpperCase() + columnName.substring(1);
     }
-
-    /**
-     *
-     * @param result
-     * @return Returns column names in a table.
-     */
-    private String getColumnNamesFromTable(ResultSet result) throws SQLException{
-        try {
-            ResultSetMetaData columnNames = result.getMetaData();
-            int columnCount = columnNames.getColumnCount();
-            StringBuilder stringColumnNames = new StringBuilder();
-            for (int i = 0; i < columnCount; i++) {
-                stringColumnNames.append(String.format("%-30s", columnNames.getColumnName(i+1)));
-            }
-            stringColumnNames.append("\n");
-            for (int i = 0; i < 80; i++) { stringColumnNames.append("-"); }
-            return stringColumnNames.toString();
-
-
-        }catch (SQLException e){
-            return "Could not createTableObject column names";
-        }
-    }
-
 }

@@ -1,6 +1,7 @@
 package Innlevering1.Database;
 
 import Innlevering1.FileReader;
+import Innlevering1.TableObjectFromDB;
 import Innlevering1.TableObjectFromFile;
 import org.junit.After;
 import org.junit.Before;
@@ -47,7 +48,15 @@ public class DataPublisherTest {
 
         //Checking if tableObjectFromFile exist
         DatabaseReader databaseReader = new DatabaseReader(dbConnector);
-        assertTrue(databaseReader.tableExist(tableName));
+        TableObjectFromDB dbTable = new TableObjectFromDB();
+        dbTable = databaseReader.getAllTables(dbTable);
+
+        boolean tableInDb = false;
+        for (String table: dbTable.getTablesInDB()) {
+            if (table.equals("subjectTest")) tableInDb = true;
+        }
+
+        assertTrue(tableInDb);
     }
 
 }
