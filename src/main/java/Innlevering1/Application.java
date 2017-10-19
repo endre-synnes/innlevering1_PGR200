@@ -72,6 +72,8 @@ public class Application {
             System.out.println(" Object not initialised.");
         }catch (FileNotFoundException noFile){
             System.out.println("File not Found.");
+        }catch (IllegalArgumentException illegalArgument){
+            System.out.println(illegalArgument.getMessage());
         }catch (Exception e){
             System.out.println("Exception i Application");
         }
@@ -114,7 +116,10 @@ public class Application {
 
     private void getAllTables() throws SQLException{
         System.out.println("\nPrinting all tables in database:");
-        System.out.println(DBReader.getAllTables());
+        TableObjectFromDB dbTable = new TableObjectFromDB();
+        dbTable = DBReader.getAllTables(dbTable);
+        System.out.println(dbTable.readContent());
+
     }
 
     private void getAllFromOneTable() throws SQLException, Exception{
@@ -131,14 +136,20 @@ public class Application {
         System.out.println(dbTable.readContent());
     }
 
-    private void getLinesWithValuesGreaterOrLessThen() throws SQLException{
+    private void getLinesWithValuesGreaterOrLessThen() throws SQLException, IllegalArgumentException{
         System.out.println("\nEnter name of table, column name, greater/less and integer value");
-        System.out.println(DBReader.getLinesWithValuesGreaterOrLessThen(scanner.nextLine(), scanner.nextLine(), scanner.nextLine(), scanner.nextLine()) + "\n");
+        TableObjectFromDB dbTable = new TableObjectFromDB();
+        dbTable = DBReader.getLinesWithValuesGreaterOrLessThen(scanner.nextLine(), scanner.nextLine(),
+                                                               scanner.nextLine(), scanner.nextLine(),
+                                                               dbTable);
+        System.out.println(dbTable.readContent());
     }
 
     private void countRows() throws SQLException{
         System.out.println("\nEnter name of the table you want to count rows: ");
-        System.out.println(DBReader.countRowsInTable(scanner.nextLine()));
+        TableObjectFromDB dbTable = new TableObjectFromDB();
+        dbTable = DBReader.countRowsInTable(scanner.nextLine(), dbTable);
+        System.out.println(dbTable.readContent());
     }
 
 

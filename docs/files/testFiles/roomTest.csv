@@ -1,4 +1,4 @@
-room;
+roomTest;
 id;capacity;roomType;
 VARCHAR (11) NOT NULL;INT (11) NOT NULL;VARCHAR(255);
 id;

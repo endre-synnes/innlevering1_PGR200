@@ -354,7 +354,7 @@
     <table id="163" parent="8" name="city"/>
     <table id="164" parent="8" name="country"/>
     <table id="165" parent="8" name="countrylanguage"/>
-    <table id="166" parent="9" name="subject"/>
+    <table id="166" parent="9" name="room"/>
     <table id="167" parent="10" name="room"/>
     <column id="168" parent="11" name="CHARACTER_SET_NAME">
       <Position>1</Position>
@@ -9086,15 +9086,14 @@ Language</ColNames>
       <DataType>varchar(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1950" parent="166" name="name">
+    <column id="1950" parent="166" name="capacity">
       <Position>2</Position>
-      <DataType>varchar(255)|0</DataType>
+      <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1951" parent="166" name="participants">
+    <column id="1951" parent="166" name="roomType">
       <Position>3</Position>
-      <DataType>int(10)|0</DataType>
-      <NotNull>1</NotNull>
+      <DataType>varchar(255)|0</DataType>
     </column>
     <key id="1952" parent="166" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>

@@ -13,11 +13,14 @@ public class DatabaseReader{
     }
 
 
-    public String getAllTables() throws SQLException{
+    public TableObjectFromDB getAllTables(TableObjectFromDB tableObjectFromDB) throws SQLException{
         try (Connection connection = dbConnector.getConnection();
-             PreparedStatement statement = connection.prepareStatement("")) {
-            ResultSet result = statement.executeQuery("SHOW TABLES");
-            return buildString(result);
+             PreparedStatement statement = connection.
+                     prepareStatement("SELECT Table_Name as TableName  " +
+                             "FROM information_schema.tables " +
+                             "where table_schema='pgr200innlevering1'")) {
+            ResultSet result = statement.executeQuery();
+            return setContentOfTableFromDB(result, tableObjectFromDB);
         }
     }
 
@@ -31,7 +34,6 @@ public class DatabaseReader{
             ResultSet result = statement.executeQuery("SELECT * FROM " + tableName);
             return setContentOfTableFromDB(result, tableObjectFromDB);
         }catch (Exception e){
-
             e.printStackTrace();
             return null;
         }
@@ -62,9 +64,10 @@ public class DatabaseReader{
      * @param value
      * @return Return a formatted string containing lines with an int value greater og less then value you put in.
      */
-    public String getLinesWithValuesGreaterOrLessThen(String tableName,
+    public TableObjectFromDB getLinesWithValuesGreaterOrLessThen(String tableName,
                                                       String columnName, String greaterOrLess,
-                                                      String value) throws SQLException{
+                                                      String value, TableObjectFromDB tableObjectFromDB)
+                                                      throws SQLException{
         try(Connection connection = dbConnector.getConnection();
         PreparedStatement statement = connection.prepareStatement("")){
             String sqlSyntax = "SELECT * FROM " + tableName + " WHERE " + columnName;
@@ -76,9 +79,9 @@ public class DatabaseReader{
                 sqlSyntax += " < " + value + ";";
 
             }
-            else return "Enter valid data and parameter (greater or less)";
+            else throw new IllegalArgumentException("Enter a valid input argument ('greater' or 'less')");
             ResultSet result = statement.executeQuery(sqlSyntax);
-            return buildString(result);
+            return setContentOfTableFromDB(result, tableObjectFromDB);
         }
     }
 
@@ -87,11 +90,11 @@ public class DatabaseReader{
      * @param tableName
      * @return Returns a string with the number of rows in a table.
      */
-    public String countRowsInTable(String tableName) throws SQLException{
+    public TableObjectFromDB countRowsInTable(String tableName, TableObjectFromDB tableObjectFromDB) throws SQLException{
         try (Connection connection = dbConnector.getConnection();
-             PreparedStatement statement = connection.prepareStatement("")) {
-            String sqlSyntax = "Select count(*) as rows from " + tableName;
-            return buildString(statement.executeQuery(sqlSyntax));
+             PreparedStatement statement = connection.prepareStatement("Select count(*) as rows from " + tableName)) {
+            ResultSet result = statement.executeQuery();
+            return setContentOfTableFromDB(result, tableObjectFromDB);
         }
     }
 
@@ -103,15 +106,12 @@ public class DatabaseReader{
     public TableObjectFromDB getMetaDataFromTable(String tableName, TableObjectFromDB tableObjectFromDB)
             throws SQLException, NullPointerException{
         try (Connection connection = dbConnector.getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + tableName)){
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + tableName)) {
             ResultSet result = statement.executeQuery();
             setTableMetadata(result, tableObjectFromDB);
             return tableObjectFromDB;
-
-        }catch (SQLException e){
-            throw new SQLException();
         }catch (NullPointerException e){
-            throw new NullPointerException("Table objectFrom file was empty");
+            throw new NullPointerException("Table object was not initialised");
         }
     }
 
@@ -188,7 +188,7 @@ public class DatabaseReader{
             String[] columnTypeName = new String[columnCount];
 
             for (int i = 0; i < columnCount; i++) {
-                columnNames[i] = metadata.getColumnName(i + 1);
+                columnNames[i] = formatColumnName(metadata.getColumnName(i + 1));
                 columnDisplaySize[i] = String.valueOf(metadata.getColumnDisplaySize(i + 1));
                 columnTypeName[i] = metadata.getColumnTypeName(i + 1);
             }
@@ -201,6 +201,11 @@ public class DatabaseReader{
         }catch (SQLException e){
             throw new SQLException();
         }
+    }
+
+    private String formatColumnName(String columnName){
+        columnName = columnName.toLowerCase().replaceAll("_", " ");
+        return columnName.substring(0, 1).toUpperCase() + columnName.substring(1);
     }
 
     /**

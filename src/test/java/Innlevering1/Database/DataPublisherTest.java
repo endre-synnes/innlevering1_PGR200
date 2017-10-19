@@ -28,18 +28,18 @@ public class DataPublisherTest {
         TableObjectFromFile tableObjectFromFile = new TableObjectFromFile();
         tableObjectFromFile = reader.createTableObject("testFiles/subjectTest", tableObjectFromFile);
         DataPublisher publisher = new DataPublisher(dbConnector);
-        assertEquals("Successfully created tableObjectFromFile!", publisher.createTableInDatabase(tableObjectFromFile));
+        publisher.createTableInDatabase(tableObjectFromFile);
     }
 
     @Test
     public void doesTableExistInDatabaseAfterFileIsReadAndPushedToServer() throws Exception {
 
-        String tableName = "subject";
+        String tableName = "subjectTest";
 
         //Reading file
         FileReader fileReader = new FileReader();
         TableObjectFromFile tableObjectFromFile = new TableObjectFromFile();
-        tableObjectFromFile = fileReader.createTableObject(tableName, tableObjectFromFile);
+        tableObjectFromFile = fileReader.createTableObject("testFiles/" + tableName, tableObjectFromFile);
 
         //Publishing tableObjectFromFile
         DataPublisher publisher = new DataPublisher(dbConnector);

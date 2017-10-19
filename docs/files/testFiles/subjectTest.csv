@@ -1,4 +1,4 @@
-subject;
+subjectTest;
 id;name;participants;
 VARCHAR(11) NOT NULL;VARCHAR(255) NOT NULL;INT(10) NOT NULL;
 id;
