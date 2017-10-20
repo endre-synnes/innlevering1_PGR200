@@ -198,9 +198,14 @@ public class Application {
 
 
 
-    public static void main(String[] args) throws Exception {
-        Application application = new Application(new DatabaseConnector("DatabaseProperties.properties"));
-        application.run();
+    public static void main(String[] args) {
+        try {
+            Application application = new Application(new DatabaseConnector("DatabaseProperties.properties"));
+            application.run();
+        }catch (Exception e){
+            System.out.println("Error while connecting to server, check properties file!");
+        }
+
     }
 
 }

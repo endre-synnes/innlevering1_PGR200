@@ -1,6 +1,7 @@
 package Innlevering1.Database;
 
 
+import com.mysql.jdbc.CommunicationsException;
 import com.mysql.jdbc.exceptions.MySQLDataException;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
@@ -51,9 +52,8 @@ public class DatabaseConnector implements DatabaseInterface{
             createAndSetDatabase(dataSource.getConnection());
             return dataSource.getConnection();
         }catch (SQLException e){
-            System.out.println(SQLExceptionHandler.sqlErrorCode(e.getErrorCode()));
-            System.exit(0);
-            return null;
+            System.out.println(e.getErrorCode());
+            throw new SQLException();
         }
     }
 
