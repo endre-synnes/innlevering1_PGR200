@@ -1,5 +1,6 @@
 package Innlevering1;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,7 +13,8 @@ public class FileReader {
      * @param filename
      * @return converted file
      */
-    public TableObjectFromFile createTableObject(String filename, TableObjectFromFile tableObjectFromFile) {
+    public TableObjectFromFile createTableObject(String filename, TableObjectFromFile tableObjectFromFile)
+        throws FileNotFoundException, NullPointerException{
         try {
             ArrayList<String> file = readFile(filename);
             ArrayList data = new ArrayList<>();
@@ -20,19 +22,17 @@ public class FileReader {
             tableObjectFromFile.setColumnNames(file.get(1).split(";"));
             tableObjectFromFile.setDataTypes(file.get(2).split(";"));
             tableObjectFromFile.setPrimaryKey(file.get(3));
-            for (int i = 4; i < file.size(); i++) {
-                data.add(file.get(i));
-            }
+            file.stream()
+                    .skip(4)
+                    .forEach(data::add);
             tableObjectFromFile.setLinesColumnsFromFile(data);
             return tableObjectFromFile;
-        }
-        catch (Exception e){
-            System.out.println("No such file!");
-            return null;
+        } catch(NullPointerException nullExc){
+            throw new NullPointerException("No file with that name!");
         }
     }
 
-    private ArrayList<String> readFile(String filename){
+    private ArrayList<String> readFile(String filename) throws NullPointerException{
         try(Scanner reader = new Scanner(new java.io.FileReader("docs/files/" + filename+".csv"))) {
             ArrayList list = new ArrayList();
             while (reader.hasNext()) list.add(reader.nextLine());

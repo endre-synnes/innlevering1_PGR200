@@ -181,7 +181,7 @@ public class Application {
     }
 
 
-    private void readAllExampleFiles() throws SQLException{
+    private void readAllExampleFiles() throws SQLException, FileNotFoundException{
         FileReader fileReader = new FileReader();
         String[] fileNames = {"availability", "lecturer", "lecturerAndSubject",
                 "program", "room", "semester", "subject", "subjectAndProgram",
