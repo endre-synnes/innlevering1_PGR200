@@ -24,39 +24,40 @@ public class DataPublisherTest {
     }
 
     @Test
-    public void ableToCreateTable() throws Exception {
+    public void ableToCreateTableAndInsertData() throws Exception {
         FileReader reader = new FileReader();
         TableObjectFromFile tableObjectFromFile = new TableObjectFromFile();
         tableObjectFromFile = reader.createTableObject("testFiles/subjectTest", tableObjectFromFile);
         DataPublisher publisher = new DataPublisher(dbConnector);
         publisher.createTableInDatabase(tableObjectFromFile);
+        publisher.insertDataToDatabase(tableObjectFromFile);
     }
 
-    @Test
-    public void doesTableExistInDatabaseAfterFileIsReadAndPushedToServer() throws Exception {
-
-        String tableName = "subjectTest";
-
-        //Reading file
-        FileReader fileReader = new FileReader();
-        TableObjectFromFile tableObjectFromFile = new TableObjectFromFile();
-        tableObjectFromFile = fileReader.createTableObject("testFiles/" + tableName, tableObjectFromFile);
-
-        //Publishing tableObjectFromFile
-        DataPublisher publisher = new DataPublisher(dbConnector);
-        publisher.createTableInDatabase(tableObjectFromFile);
-
-        //Checking if tableObjectFromFile exist
-        DatabaseReader databaseReader = new DatabaseReader(dbConnector);
-        TableObjectFromDB dbTable = new TableObjectFromDB();
-        dbTable = databaseReader.getAllTables(dbTable);
-
-        boolean tableInDb = false;
-        for (String table: dbTable.getTablesInDB()) {
-            if (table.equals("subjectTest")) tableInDb = true;
-        }
-
-        assertTrue(tableInDb);
-    }
+//    @Test
+//    public void doesTableExistInDatabaseAfterFileIsReadAndPushedToServer() throws Exception {
+//
+//        String tableName = "subjectTest";
+//
+//        //Reading file
+//        FileReader fileReader = new FileReader();
+//        TableObjectFromFile tableObjectFromFile = new TableObjectFromFile();
+//        tableObjectFromFile = fileReader.createTableObject("testFiles/" + tableName, tableObjectFromFile);
+//
+//        //Publishing tableObjectFromFile
+//        DataPublisher publisher = new DataPublisher(dbConnector);
+//        publisher.createTableInDatabase(tableObjectFromFile);
+//
+//        //Checking if tableObjectFromFile exist
+//        DatabaseReader databaseReader = new DatabaseReader(dbConnector);
+//        TableObjectFromDB dbTable = new TableObjectFromDB();
+//        dbTable = databaseReader.getAllTables(dbTable);
+//
+//        boolean tableInDb = false;
+//        for (String table: dbTable.getTablesInDB()) {
+//            if (table.equals("subjectTest")) tableInDb = true;
+//        }
+//
+//        assertTrue(tableInDb);
+//    }
 
 }

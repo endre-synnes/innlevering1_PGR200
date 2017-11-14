@@ -23,7 +23,7 @@ public class DatabaseReader{
              PreparedStatement statement = connection.
                      prepareStatement("SELECT Table_Name as TableName  " +
                              "FROM information_schema.tables " +
-                             "where table_schema='pgr200innlevering1'")) {
+                             "where table_schema='" + connection.getCatalog() + "'")) {
             ResultSet result = statement.executeQuery();
             return setContentOfTableFromDB(result, tableObjectFromDB);
         }
@@ -36,14 +36,13 @@ public class DatabaseReader{
      * @return Populated table from Database
      * @throws Exception
      */
-    public TableObjectFromDB getAllFromOneTable(String tableName, TableObjectFromDB tableObjectFromDB) throws Exception{
+    public TableObjectFromDB getAllFromOneTable(String tableName, TableObjectFromDB tableObjectFromDB) throws SQLException{
         try (Connection connection = dbConnector.getConnection();
-             PreparedStatement statement = connection.prepareStatement("")) {
-            ResultSet result = statement.executeQuery("SELECT * FROM " + tableName);
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + tableName + "")) {
+            ResultSet result = statement.executeQuery();
             return setContentOfTableFromDB(result, tableObjectFromDB);
         }catch (Exception e){
-            e.printStackTrace();
-            return null;
+            throw new SQLException();
         }
     }
 
@@ -59,43 +58,13 @@ public class DatabaseReader{
     public TableObjectFromDB getLinesThatHasOneParameter(String tableName, String columnName,
                                               String parameter, TableObjectFromDB tableObjectFromDB) throws SQLException{
         try (Connection connection = dbConnector.getConnection();
-        PreparedStatement statement = connection.prepareStatement("")){
-            ResultSet result = statement.executeQuery("SELECT * FROM " + tableName
-            + " WHERE " + columnName + " LIKE '" + parameter + "';");
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + tableName
+                + " WHERE " + columnName + " LIKE '" + parameter + "';")){
+            ResultSet result = statement.executeQuery();
             return setContentOfTableFromDB(result, tableObjectFromDB);
         }
     }
 
-    /**
-     *
-     * @param tableName
-     * @param columnName
-     * @param greaterOrLess
-     * @param value
-     * @param tableObjectFromDB
-     * @return Populated table from Database
-     * @throws SQLException
-     */
-    public TableObjectFromDB getLinesWithValuesGreaterOrLessThen(String tableName,
-                                                      String columnName, String greaterOrLess,
-                                                      String value, TableObjectFromDB tableObjectFromDB)
-                                                      throws SQLException{
-        try(Connection connection = dbConnector.getConnection();
-        PreparedStatement statement = connection.prepareStatement("")){
-            String sqlSyntax = "SELECT * FROM " + tableName + " WHERE " + columnName;
-            if (greaterOrLess.equals("greater")){
-                sqlSyntax += " > " + value + ";";
-
-            }
-            else if (greaterOrLess.equals("less")){
-                sqlSyntax += " < " + value + ";";
-
-            }
-            else throw new IllegalArgumentException("Enter a valid input argument ('greater' or 'less')");
-            ResultSet result = statement.executeQuery(sqlSyntax);
-            return setContentOfTableFromDB(result, tableObjectFromDB);
-        }
-    }
 
     /**
      *

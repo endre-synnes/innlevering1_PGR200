@@ -4,6 +4,7 @@ import Innlevering1.Database.*;
 
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Application {
@@ -48,17 +49,15 @@ public class Application {
                     break;
                 case "4" : getLinesWithParameter();
                     break;
-                case "5" : getLinesWithValuesGreaterOrLessThen();
+                case "5" : countRows();
                     break;
-                case "6" : countRows();
+                case "6" : getMetaDataFromTable();
                     break;
-                case "7" : getMetaDataFromTable();
+                case "7" : connectTables();
                     break;
-                case "8" : connectTables();
+                case "8" : dropTable();
                     break;
-                case "9" : dropTable();
-                    break;
-                case "10" : readAllExampleFiles();
+                case "9" : readAllExampleFiles();
                     break;
                 case "exit" : System.exit(0);
                     break;
@@ -89,12 +88,11 @@ public class Application {
         builder.append(String.format("%-10s %-50s\n", "2", "Get tables in database"));
         builder.append(String.format("%-10s %-50s\n", "3", "Get everything from one table"));
         builder.append(String.format("%-10s %-50s\n", "4", "Get all lines from a table that has column equal to your input value."));
-        builder.append(String.format("%-10s %-50s\n", "5", "Get all lines that have column value greater or less then your input value."));
-        builder.append(String.format("%-10s %-50s\n", "6", "Count rows in a table."));
-        builder.append(String.format("%-10s %-50s\n", "7", "Get metadata from table."));
-        builder.append(String.format("%-10s %-50s\n", "8", "Connect all tables (Only after all tables are in the database!)"));
-        builder.append(String.format("%-10s %-50s\n", "9", "Drop TableObjectFromFile (Needed to rewrite tables if you have connected tables)"));
-        builder.append(String.format("%-10s %-50s\n", "10", "Read all example files"));
+        builder.append(String.format("%-10s %-50s\n", "5", "Count rows in a table."));
+        builder.append(String.format("%-10s %-50s\n", "6", "Get metadata from table."));
+        builder.append(String.format("%-10s %-50s\n", "7", "Connect all tables (Only after all tables are in the database!)"));
+        builder.append(String.format("%-10s %-50s\n", "8", "Drop TableObjectFromFile (Needed to rewrite tables if you have connected tables)"));
+        builder.append(String.format("%-10s %-50s\n", "9", "Read all example files"));
         builder.append(String.format("%-10s %-50s\n", "exit", "Exit program"));
         for (int i = 0; i < 60; i++) { builder.append("#"); }
         builder.append("\nPress the command value and hit 'Enter':");
@@ -122,30 +120,35 @@ public class Application {
 
     }
 
-    private void getAllFromOneTable() throws SQLException, Exception{
-        System.out.println("\nEnter name of the table you want to print: ");
+    private void getAllFromOneTable() throws SQLException{
         TableObjectFromDB dbTable = new TableObjectFromDB();
+        getAllTables();
+        System.out.println("\nEnter name of the table you want to print: ");
         dbTable = DBReader.getAllFromOneTable(scanner.nextLine(), dbTable);
         System.out.println(StringCreator.getContent(dbTable));
     }
 
     private void getLinesWithParameter() throws SQLException{
-        System.out.println("\nEnter name of table, column name and your parameter (press enter for each element):");
         TableObjectFromDB dbTable = new TableObjectFromDB();
-        dbTable = DBReader.getLinesThatHasOneParameter(scanner.nextLine(), scanner.nextLine(), scanner.nextLine(), dbTable);
+        getAllTables();
+        System.out.println("Enter table name:");
+        String tableName = scanner.nextLine();
+        getColumnNames(tableName, dbTable);
+        System.out.println("Enter column name:");
+        String columnName = scanner.nextLine();
+        System.out.println("Enter value: ");
+        dbTable = DBReader.getLinesThatHasOneParameter(tableName, columnName, scanner.nextLine(), dbTable);
         System.out.println(StringCreator.getContent(dbTable));
     }
 
-    private void getLinesWithValuesGreaterOrLessThen() throws SQLException, IllegalArgumentException{
-        System.out.println("\nEnter name of table, column name, greater/less and integer value");
-        TableObjectFromDB dbTable = new TableObjectFromDB();
-        dbTable = DBReader.getLinesWithValuesGreaterOrLessThen(scanner.nextLine(), scanner.nextLine(),
-                                                               scanner.nextLine(), scanner.nextLine(),
-                                                               dbTable);
-        System.out.println(StringCreator.getContent(dbTable));
+    private void getColumnNames(String tableName, TableObjectFromDB dbTable) throws SQLException{
+        dbTable = DBReader.getAllFromOneTable(tableName, dbTable);
+        System.out.println(StringCreator.getColumnNames(dbTable));
     }
+
 
     private void countRows() throws SQLException{
+        getAllTables();
         System.out.println("\nEnter name of the table you want to count rows: ");
         TableObjectFromDB dbTable = new TableObjectFromDB();
         dbTable = DBReader.countRowsInTable(scanner.nextLine(), dbTable);
@@ -154,6 +157,7 @@ public class Application {
 
 
     private void getMetaDataFromTable() throws SQLException{
+        getAllTables();
         System.out.println("\nEnter name of the table you want to get metadata from: ");
         TableObjectFromDB dbTable = new TableObjectFromDB();
         dbTable = DBReader.getMetaDataFromTable(scanner.nextLine(), dbTable);
@@ -176,6 +180,7 @@ public class Application {
 
 
     private void dropTable() throws SQLException{
+        getAllTables();
         System.out.println("\nEnter name of the table you want to drop: ");
         System.out.println(tableManager.dropTable(scanner.nextLine()) + "\n");
     }

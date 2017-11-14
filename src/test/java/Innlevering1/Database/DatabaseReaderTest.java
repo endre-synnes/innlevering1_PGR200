@@ -5,15 +5,35 @@ import Innlevering1.TableObjectFromDB;
 import Innlevering1.TableObjectFromFile;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class DatabaseReaderTest {
-    private DatabaseConnector dbConnector;
+    private static DatabaseConnector dbConnector;
+    private static FileReader fileReader;
+    private static TableObjectFromDB tableObjectFromDB;
+    private static TableObjectFromFile tableObjectFromFile;
+    private static DataPublisher publisher;
+    private static DatabaseReader dbReader;
+
+    @BeforeClass
+    public static void setUp() throws Exception{
+        dbConnector = new DatabaseConnector("TestDatabaseProperties.properties");
+        fileReader = new FileReader();
+        tableObjectFromFile = new TableObjectFromFile();
+        publisher = new DataPublisher(dbConnector);
+        dbReader = new DatabaseReader(dbConnector);
+        tableObjectFromFile = fileReader.createTableObject("testFiles/roomTest", tableObjectFromFile);
+        publisher.createTableInDatabase(tableObjectFromFile);
+        publisher.insertDataToDatabase(tableObjectFromFile);
+    }
 
     @Before
-    public void setUp() throws Exception {
-        dbConnector = new DatabaseConnector("TestDatabaseProperties.properties");
+    public void setup() throws Exception {
+
+        tableObjectFromFile = new TableObjectFromFile();
+        tableObjectFromDB = new TableObjectFromDB();
     }
 
     @After
@@ -24,22 +44,28 @@ public class DatabaseReaderTest {
 
     @Test
     public void countNumberOfRowsInTable() throws Exception {
-        //Read file
-        FileReader fileReader = new FileReader();
-        TableObjectFromFile tableObjectFromFile = new TableObjectFromFile();
-
-        //Publish file
-        tableObjectFromFile = fileReader.createTableObject("testFiles/roomTest", tableObjectFromFile);
-        DataPublisher publisher = new DataPublisher(dbConnector);
-        publisher.createTableInDatabase(tableObjectFromFile);
-        publisher.insertDataToDatabase(tableObjectFromFile);
-
-        //Rad from DB
-        TableObjectFromDB tableObjectFromDB = new TableObjectFromDB();
-        DatabaseReader reader = new DatabaseReader(dbConnector);
-        tableObjectFromDB = reader.getAllFromOneTable("roomTest", tableObjectFromDB);
-
-        //Test answer
+        tableObjectFromDB = dbReader.getAllFromOneTable("roomTest", tableObjectFromDB);
         assertEquals(7, tableObjectFromDB.getContentOfTable().size());
+    }
+
+
+    @Test
+    public void getAllTables() throws Exception {
+        tableObjectFromDB = dbReader.getAllTables(tableObjectFromDB);
+        assertEquals(1, tableObjectFromDB.getContentOfTable().size());
+    }
+
+    @Test
+    public void getAllFromOneTable() throws Exception {
+        tableObjectFromDB = dbReader.getMetaDataFromTable("roomtest", tableObjectFromDB);
+        assertEquals(3, tableObjectFromDB.getColumnName().length);
+        assertEquals("Id", tableObjectFromDB.getColumnName()[0]);
+    }
+
+    @Test
+    public void getLinesWithParameter() throws Exception {
+        tableObjectFromDB = dbReader.getLinesThatHasOneParameter("roomtest",
+                "capacity", "45", tableObjectFromDB);
+        assertEquals(2, tableObjectFromDB.getContentOfTable().size());
     }
 }

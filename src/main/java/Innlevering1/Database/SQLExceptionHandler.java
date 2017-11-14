@@ -8,6 +8,7 @@ public class SQLExceptionHandler extends Throwable {
             case 1217 : return unableToDrop();
             case 1022 : return "This constraint already exist!";
             case 1146 : return "Table or column name does not exist!";
+            case 1051 : return "Unknown table!";
             case 1054 : return "Unknown column name or value";
             case 1215 : return "Check your table or column name!";
             case 1072 : return "Check if your column name exists!";

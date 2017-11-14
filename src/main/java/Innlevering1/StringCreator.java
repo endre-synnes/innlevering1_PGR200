@@ -1,5 +1,7 @@
 package Innlevering1;
 
+import java.util.*;
+
 public class StringCreator {
 
     public StringCreator(){ }
@@ -32,6 +34,19 @@ public class StringCreator {
                     dbTable.getColumnName()[i],
                     dbTable.getColumnTypeName()[i],
                     dbTable.getColumnDisplaySize()[i]));
+        }
+        return string.toString();
+    }
+
+
+    public static String getColumnNames(TableObjectFromDB dbTable){
+        StringBuilder string = new StringBuilder();
+        string.append(String.format("%-15s\n", "Column Name"));
+        for (int i = 0; i < 20; i++) { string.append("-"); }
+        string.append("\n");
+        for (int i = 0; i < dbTable.getColumnName().length; i++) {
+            string.append(String.format("%-15s\n",
+                    dbTable.getColumnName()[i]));
         }
         return string.toString();
     }
