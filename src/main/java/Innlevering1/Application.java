@@ -53,11 +53,11 @@ public class Application {
                     break;
                 case "6" : getMetaDataFromTable();
                     break;
-                case "7" : connectTables();
+                case "7" : dropTable();
                     break;
-                case "8" : dropTable();
+                case "8" : readAllExampleFiles();
                     break;
-                case "9" : readAllExampleFiles();
+                case "9" : getSubjectAndRoom();
                     break;
                 case "exit" : System.exit(0);
                     break;
@@ -74,6 +74,7 @@ public class Application {
         }catch (IllegalArgumentException illegalArgument){
             System.out.println(illegalArgument.getMessage());
         }catch (Exception e){
+            System.out.println(e.getMessage());
             System.out.println("Exception i Application");
         }
 
@@ -90,9 +91,9 @@ public class Application {
         builder.append(String.format("%-10s %-50s\n", "4", "Get all lines from a table that has column equal to your input value."));
         builder.append(String.format("%-10s %-50s\n", "5", "Count rows in a table."));
         builder.append(String.format("%-10s %-50s\n", "6", "Get metadata from table."));
-        builder.append(String.format("%-10s %-50s\n", "7", "Connect all tables (Only after all tables are in the database!)"));
-        builder.append(String.format("%-10s %-50s\n", "8", "Drop TableObjectFromFile (Needed to rewrite tables if you have connected tables)"));
-        builder.append(String.format("%-10s %-50s\n", "9", "Read all example files"));
+        builder.append(String.format("%-10s %-50s\n", "7", "Drop TableObjectFromFile (Needed to rewrite tables if you have connected tables)"));
+        builder.append(String.format("%-10s %-50s\n", "8", "Read all example files and connect them."));
+        builder.append(String.format("%-10s %-50s\n", "9", "Get subject that is connected to a room."));
         builder.append(String.format("%-10s %-50s\n", "exit", "Exit program"));
         for (int i = 0; i < 60; i++) { builder.append("#"); }
         builder.append("\nPress the command value and hit 'Enter':");
@@ -164,6 +165,13 @@ public class Application {
         System.out.println(StringCreator.getMetaData(dbTable));
     }
 
+
+    private void getSubjectAndRoom() throws Exception{
+        TableObjectFromDB dbTable = new TableObjectFromDB();
+        dbTable = DBReader.getTwoConnectedTables(dbTable);
+        System.out.println(StringCreator.getContent(dbTable));
+    }
+
     /**
      * Creates foreign key constraints for all example files.
      */
@@ -198,6 +206,8 @@ public class Application {
             publisher.insertDataToDatabase(tableObjectFromFile);
         }
         System.out.println("All tables are created.\n");
+
+        connectTables();
     }
 
 

@@ -1,7 +1,9 @@
 package Innlevering1.Database;
 
+import Innlevering1.StringCreator;
 import Innlevering1.TableObjectFromDB;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -99,6 +101,27 @@ public class DatabaseReader{
         }catch (NullPointerException e){
             throw new NullPointerException("Table object was not initialised");
         }
+    }
+
+
+    public TableObjectFromDB getTwoConnectedTables(TableObjectFromDB tableObjectFromDB) throws Exception {
+        try (Connection connection = dbConnector.getConnection();
+        PreparedStatement statement = connection
+                .prepareStatement(buildQueryForConnectedTables())){
+            ResultSet result = statement.executeQuery();
+            return setContentOfTableFromDB(result, tableObjectFromDB);
+        }
+        catch (SQLException se){
+            throw new Exception("Tables where not in the database");
+        }
+    }
+
+
+    private String buildQueryForConnectedTables(){
+        return  "SELECT r.id AS roomId, r.roomType, s.id AS SubjectId, s.name " +
+                "FROM subjectandroom sar " +
+                "LEFT JOIN room r ON (sar.roomId = r.id) " +
+                "LEFT JOIN subject s ON (sar.subjectId = s.id);";
     }
 
     /**
