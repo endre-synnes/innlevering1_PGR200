@@ -104,15 +104,21 @@ public class DatabaseReader{
     }
 
 
-    public TableObjectFromDB getTwoConnectedTables(TableObjectFromDB tableObjectFromDB) throws Exception {
+    /**
+     * This is a method where the user can not control what is returned. This will return an
+     * object containing data from the two tables: subject and room.
+     * @param tableObjectFromDB
+     * @return tableObjectFromDB
+     * @throws SQLException
+     */
+    public TableObjectFromDB getTwoConnectedTables(TableObjectFromDB tableObjectFromDB) throws SQLException {
         try (Connection connection = dbConnector.getConnection();
-        PreparedStatement statement = connection
-                .prepareStatement(buildQueryForConnectedTables())){
+        PreparedStatement statement = connection.prepareStatement(buildQueryForConnectedTables())){
             ResultSet result = statement.executeQuery();
             return setContentOfTableFromDB(result, tableObjectFromDB);
         }
         catch (SQLException se){
-            throw new Exception("Tables where not in the database");
+            throw new SQLException("Tables where not in the database");
         }
     }
 
@@ -122,6 +128,16 @@ public class DatabaseReader{
                 "FROM subjectandroom sar " +
                 "LEFT JOIN room r ON (sar.roomId = r.id) " +
                 "LEFT JOIN subject s ON (sar.subjectId = s.id);";
+    }
+
+    public TableObjectFromDB getIdAndCapacityFromRoomWithCapacityEqualsInputValue(String value, TableObjectFromDB tableObjectFromDB) throws SQLException{
+        String sqlQuery = "SELECT id, capacity FROM room WHERE capacity = ?";
+        try (Connection connection = dbConnector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sqlQuery)){
+            statement.setString(1, value);
+            ResultSet result = statement.executeQuery();
+            return setContentOfTableFromDB(result, tableObjectFromDB);
+        }
     }
 
     /**

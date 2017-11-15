@@ -41,23 +41,25 @@ public class Application {
     private void runCases(String userInput){
         try {
             switch (userInput){
-                case "1" : readFileAndPublish();
+                case "1" : readAllExampleFiles();
                     break;
-                case "2" : getAllTables();
+                case "2" : readFileAndPublish();
                     break;
-                case "3" : getAllFromOneTable();
+                case "3" : getAllTables();
                     break;
-                case "4" : getLinesWithParameter();
+                case "4" : getAllFromOneTable();
                     break;
-                case "5" : countRows();
+                case "5" : getLinesWithParameter();
                     break;
-                case "6" : getMetaDataFromTable();
+                case "6" : countRows();
                     break;
-                case "7" : dropTable();
+                case "7" : getMetaDataFromTable();
                     break;
-                case "8" : readAllExampleFiles();
+                case "8" : dropTable();
                     break;
                 case "9" : getSubjectAndRoom();
+                    break;
+                case "10" : getIdAndCapacityFromRoomEqualToInputValue();
                     break;
                 case "exit" : System.exit(0);
                     break;
@@ -85,15 +87,16 @@ public class Application {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < 60; i++) { builder.append("#"); }
         builder.append(String.format("\n%-10s %-50s\n", "command:", "Description:"));
-        builder.append(String.format("%-10s %-50s\n", "1", "Read file and publish to server."));
-        builder.append(String.format("%-10s %-50s\n", "2", "Get tables in database"));
-        builder.append(String.format("%-10s %-50s\n", "3", "Get everything from one table"));
-        builder.append(String.format("%-10s %-50s\n", "4", "Get all lines from a table that has column equal to your input value."));
-        builder.append(String.format("%-10s %-50s\n", "5", "Count rows in a table."));
-        builder.append(String.format("%-10s %-50s\n", "6", "Get metadata from table."));
-        builder.append(String.format("%-10s %-50s\n", "7", "Drop TableObjectFromFile (Needed to rewrite tables if you have connected tables)"));
-        builder.append(String.format("%-10s %-50s\n", "8", "Read all example files and connect them."));
+        builder.append(String.format("%-10s %-50s\n", "1", "Read all example files and connect them."));
+        builder.append(String.format("%-10s %-50s\n", "2", "Read file and publish to server."));
+        builder.append(String.format("%-10s %-50s\n", "3", "Get tables in database"));
+        builder.append(String.format("%-10s %-50s\n", "4", "Get everything from one table"));
+        builder.append(String.format("%-10s %-50s\n", "5", "Get all lines from a table that has column equal to your input value."));
+        builder.append(String.format("%-10s %-50s\n", "6", "Count rows in a table."));
+        builder.append(String.format("%-10s %-50s\n", "7", "Get metadata from table."));
+        builder.append(String.format("%-10s %-50s\n", "8", "Drop table (can not be done if you have used command: 1)"));
         builder.append(String.format("%-10s %-50s\n", "9", "Get subject that is connected to a room."));
+        builder.append(String.format("%-10s %-50s\n", "10", "Get Id and Capacity from room using Prepared Statement"));
         builder.append(String.format("%-10s %-50s\n", "exit", "Exit program"));
         for (int i = 0; i < 60; i++) { builder.append("#"); }
         builder.append("\nPress the command value and hit 'Enter':");
@@ -208,6 +211,13 @@ public class Application {
         System.out.println("All tables are created.\n");
 
         connectTables();
+    }
+
+    private void getIdAndCapacityFromRoomEqualToInputValue() throws SQLException{
+        System.out.println("\nEnter room capacity:");
+        TableObjectFromDB dbTable = new TableObjectFromDB();
+        dbTable = DBReader.getIdAndCapacityFromRoomWithCapacityEqualsInputValue(scanner.nextLine(), dbTable);
+        System.out.println(StringCreator.getContent(dbTable));
     }
 
 
