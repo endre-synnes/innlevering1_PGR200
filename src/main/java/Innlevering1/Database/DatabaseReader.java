@@ -130,6 +130,15 @@ public class DatabaseReader{
                 "LEFT JOIN subject s ON (sar.subjectId = s.id);";
     }
 
+    /**
+     * This method uses prepared statement the way it is supposed to be used.
+     * The drawback by doing this is that you can not create a dynamic method for all type of tables.
+     * This is only to show that i know how to use Prepared statement.
+     * @param value
+     * @param tableObjectFromDB
+     * @return
+     * @throws SQLException
+     */
     public TableObjectFromDB getIdAndCapacityFromRoomWithCapacityEqualsInputValue(String value, TableObjectFromDB tableObjectFromDB) throws SQLException{
         String sqlQuery = "SELECT id, capacity FROM room WHERE capacity = ?";
         try (Connection connection = dbConnector.getConnection();
