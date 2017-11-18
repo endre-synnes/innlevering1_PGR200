@@ -1,9 +1,7 @@
 package Innlevering1.Database;
 
-import Innlevering1.StringCreator;
 import Innlevering1.TableObjectFromDB;
 
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
