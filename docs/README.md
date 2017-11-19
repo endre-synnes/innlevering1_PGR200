@@ -90,4 +90,10 @@ Things i need to know to make my Program better:
     and at the same time hva the same amount of possibilites. Feedback on how to
     do my rading from file better and converting it to useful data. 
 
-    
+
+## References ##
+
+In my assignment, I have based on the methods "createTable" and "insert" that is in the solution 
+I've referred to here. I have built on these and added superior functionality as you can see in my solution.
+
+https://github.com/NikitaZhevnitskiy/dbService
